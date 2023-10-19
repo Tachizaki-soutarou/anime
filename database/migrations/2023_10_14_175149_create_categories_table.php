@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('categoy_name')->unique();       //アニメのカテゴリー名　ユニーク制約
+            $table->string('category_name')->unique();       //アニメのカテゴリー名　ユニーク制約
             $table->timestamps();                           //作成日時 & 更新日時
             $table->softDeletes();                          //削除フラグ
         });
