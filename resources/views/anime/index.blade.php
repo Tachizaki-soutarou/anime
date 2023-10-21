@@ -11,8 +11,9 @@
         <div class='posts'>
             @foreach ($animes as $anime)
                 <div class='anime'>
-                    <h2 class='title'>{{ $anime->title }}</h2>
-                    <p class='synopsis'>{{ $anime->synopsis }}</p>
+                    <h2 class='title'>
+                        <a href="/animes/{{ $anime->id }}">{{ $anime->title }}</a>
+                    </h2>
                 </div>
             @endforeach
         </div>

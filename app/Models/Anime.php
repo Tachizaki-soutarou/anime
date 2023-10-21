@@ -9,12 +9,17 @@ class Anime extends Model
 {
     use HasFactory;
     
-    protected $fillable = [
-        'title',
+    // protected $fillable = [
+    //     'title',
+    //     'first_broadcast_start_date',
+    //     'second_broadcast_start_date',
+    //     'synopsis'
+    // ];
+    
+    protected $dates = [
         'first_broadcast_start_date',
-        'second_broadcast_start_date',
-        'synopsis'
-    ];
+        'second_broadcast_start_date'
+        ];
     
     protected $guarded = [
         'created_at',

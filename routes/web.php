@@ -15,3 +15,5 @@ use App\Http\Controllers\AnimeController;
 */
 
 Route::get('/', [AnimeController::class, 'animes']);
+
+Route::get('/animes/{anime}', [AnimeController::class, 'show']);

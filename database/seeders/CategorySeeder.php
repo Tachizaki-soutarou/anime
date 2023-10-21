@@ -16,7 +16,12 @@ class CategorySeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-                'category_name' => 'ダークファンタジー',
+                [
+                    'category_name' => 'ダークファンタジー'
+                ],
+                [
+                    'category_name' => 'アクション'
+                ]
          ]);
     }
 }
