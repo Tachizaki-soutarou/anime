@@ -16,7 +16,12 @@ class OriginalSeeder extends Seeder
     public function run()
     {
          DB::table('originals')->insert([
-                'original_name' => '漫画',
+                [
+                    'original_name' => '漫画'
+                ],
+                [
+                    'original_name' => '小説'
+                ]
          ]);
     }
 }
