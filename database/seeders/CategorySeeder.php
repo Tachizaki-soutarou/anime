@@ -21,6 +21,9 @@ class CategorySeeder extends Seeder
                 ],
                 [
                     'category_name' => 'アクション'
+                ],
+                [
+                    'category_name' => 'コメディ'
                 ]
          ]);
     }

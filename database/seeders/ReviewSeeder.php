@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class ReviewSeeder extends Seeder
 {
-    'star' => '3',
     /**
      * Run the database seeds.
      *
@@ -16,6 +15,25 @@ class ReviewSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('reviews')->insert([
+                [
+                    'star' => '2',
+                    'comment' => 'おもしろい',
+                    'user_id' => '1',
+                    'anime_id' => '1'
+                ],
+                [
+                    'star' => '3',
+                    'comment' => 'すごくおもしろい',
+                    'user_id' => '1',
+                    'anime_id' => '1'
+                ],
+                [
+                    'star' => '4',
+                    'comment' => '超おもしろい',
+                    'user_id' => '1',
+                    'anime_id' => '1'
+                ]
+         ]);
     }
 }

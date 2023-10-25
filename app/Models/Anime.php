@@ -16,6 +16,7 @@ class Anime extends Model
     //     'synopsis'
     // ];
     
+    
     protected $dates = [
         'first_broadcast_start_date',
         'second_broadcast_start_date'
@@ -25,4 +26,14 @@ class Anime extends Model
         'created_at',
         'updated_at'
     ];
+    
+    public function category(){
+        //Categoryモデルのデータを取得する
+        return $this->belongsTo(Category::class);
+    }
+    
+    public function reviews(){
+        //Reviewモデルのデータを取得する
+        return $this->hasMany(Review::class);
+    }
 }
