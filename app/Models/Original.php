@@ -13,4 +13,9 @@ class Original extends Model{
         'created_at',
         'updated_at'
     ];
+    
+    public function animes(){
+        //Reviewモデルのデータを取得する
+        return $this->hasMany(Anime::class);
+    }
 }

@@ -4,13 +4,14 @@
             {{ $anime->title }}
         </h1>
         <div class="content mb-8">
+                <h1>総評価：{{ !empty($star_average) ? $star_average : "評価はまだありません" }}</h1>
             <div class="mb-4 text-xl">
                 ジャンル：{{$anime->category->category_name}}
             </div>
             <div class="anime_broadcast_start_date mb-4">
                 <p class="font-semibold">放送開始日</p>
                 <p class="ml-4">第1期：{{ $anime->first_broadcast_start_date->format('Y/m/d') }}</p>
-                <p class="ml-4">第2期：{{ $anime->second_broadcast_start_date->format('Y/m/d')}}</p>
+                <p class="ml-4">{{ !empty($anime->second_broadcast_start_date) ? "第2期：" . $anime->second_broadcast_start_date->format('Y/m/d') : "" }}</p>
             </div>
             <div class="anime_synopsis mb-4">
                 <h3 class="text-2xl font-semibold mb-2">あらすじ</h3>

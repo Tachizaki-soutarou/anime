@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
              //アニメ名　ユニーク制約
             $table->string('title')->unique();
+             //アニメ名（ひらがな）
+            $table->string('Hiragana_title')->unique();
              //アニメトップ画像　ユニーク制約
             $table->longText('image')->nullable();
             //アニメ放送開始日
