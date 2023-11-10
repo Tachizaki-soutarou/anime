@@ -17,6 +17,9 @@ class CategorySeeder extends Seeder
     {
         DB::table('categories')->insert([
                 [
+                    'category_name' => 'ファンタジー'
+                ],
+                [
                     'category_name' => 'ダークファンタジー'
                 ],
                 [
@@ -24,6 +27,9 @@ class CategorySeeder extends Seeder
                 ],
                 [
                     'category_name' => 'コメディ'
+                ],
+                [
+                    'category_name' => 'ドラマ'
                 ]
          ]);
     }
