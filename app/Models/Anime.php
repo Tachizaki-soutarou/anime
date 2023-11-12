@@ -19,7 +19,9 @@ class Anime extends Model
     
     protected $dates = [
         'first_broadcast_start_date',
-        'second_broadcast_start_date'
+        'second_broadcast_start_date',
+        'third_broadcast_start_date',
+        'fourth_broadcast_start_date'
         ];
     
     protected $guarded = [
@@ -49,41 +51,48 @@ class Anime extends Model
         return $star;
     }
     
-    public function OrderedByAverageStars(){
+    // 50音順並び替え
+    public static function OrderByJapaneseOrder($JapaneseOrderSortId = null, $perPage = 10){
         $query = self::query();
-        $query->withAvg('reviews', 'star')->orderByDesc('reviews_avg_star');
-        return $query;
-    }
-    
-    // アニメカテゴリー絞り込み
-    public static function filteredCategoryAndOrderedByAverageStars($categoryId = null, $perPage = 10)
-    {
-        $query = self::query();
-        $query->withAvg('reviews', 'star')->orderByDesc('reviews_avg_star');
-        if ($categoryId !== null) {
-            $query->where('category_id', $categoryId);
+        if($JapaneseOrderSortId !== null){
+            return $query->orderBy('Hiragana_title')->get();
         }
         return $query->paginate($perPage);
     }
     
-    public static function filteredOriginalAndOrderedByAverageStars($originalId = null, $perPage = 10)
+    // 放送日順並び替え
+    public static function OrderByBroadcastStart($BroadStartSortAscId = null, $BroadStartSortDescId = null, $perPage = 10){
+        $query = self::query();
+        if ($BroadStartSortAscId !== null) {
+            return $query->orderBy('first_broadcast_start_date')->get();
+        } else if($BroadStartSortDescId !== null){
+            return $query->orderBy('first_broadcast_start_date','DESC')->get();
+        }
+        return $query->paginate($perPage);
+    }
+    
+    // アニメカテゴリー絞り込み
+    public static function filteredByCategoryAndOriginalIdOrderedByAverageStars($categoryId = null, $originalId = null, $perPage = 10)
     {
         $query = self::query();
-        $query->withAvg('reviews', 'star')->orderByDesc('reviews_avg_star');
-        if($originalId !== null){
+        $animes = $query->withAvg('reviews', 'star')->orderByDesc('reviews_avg_star');
+         if ($categoryId !== null) {
+            $query->where('category_id', $categoryId);
+        }
+        if ($originalId !== null) {
             $query->where('original_id', $originalId);
         }
         return $query->paginate($perPage);
     }
     
-    // public static function filteredAndOrderedByAverageStars($categoryId = null, $originalId = null, $perPage = 10)
-    // {
+    // public static function OrderByBroadcastStartAndJapaneseOrder($BroadStartSortAscId = null, $BroadStartSortDescId = null, $JapaneseOrderSortId = null, $perPage = 10){
     //     $query = self::query();
-    //     $query->withAvg('reviews', 'star')->orderByDesc('reviews_avg_star');
-    //     if ($categoryId !== null && $originalId == null) {
-    //         $query->where('category_id', $categoryId);
-    //     }else if($categoryId == null && $originalId !== null){
-    //         $query->where('original_id', $originalId);
+    //     if ($BroadStartSortAscId !== null) {
+    //         return $query->orderBy('first_broadcast_start_date')->get();
+    //     } else if($BroadStartSortDescId !== null){
+    //         return $query->orderBy('first_broadcast_start_date','DESC')->get();
+    //     } else if($JapaneseOrderSortId !== null){
+    //         return $query->orderBy('Hiragana_title')->get();
     //     }
     //     return $query->paginate($perPage);
     // }

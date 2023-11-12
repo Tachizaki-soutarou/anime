@@ -24,6 +24,8 @@ return new class extends Migration
             //アニメ放送開始日
             $table->timestamp('first_broadcast_start_date')->nullable();
             $table->timestamp('second_broadcast_start_date')->nullable();
+            $table->timestamp('third_broadcast_start_date')->nullable();
+            $table->timestamp('fourth_broadcast_start_date')->nullable();
             //あらすじ
             $table->text('synopsis');
             //原作テーブル参照
