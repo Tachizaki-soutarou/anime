@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('title')->unique();
              //アニメ名（ひらがな）
             $table->string('Hiragana_title')->unique();
+            //アニメ名（ローマ字）
+            $table->string('Latin_alphabet_title')->unique();
              //アニメトップ画像　ユニーク制約
             $table->longText('image')->nullable();
             //アニメ放送開始日

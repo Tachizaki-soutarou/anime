@@ -29,6 +29,13 @@ class Anime extends Model
         'updated_at'
     ];
     
+    // public static $categoryId;
+    // public static $originalId;
+    // public static $BroadStartSortAscFlg;
+    // public static $BroadStartSortDescFlg;
+    // public static $JapaneseOrderSortFlg;
+    // public static $escapeWord;
+    
     public function category(){
         //Categoryモデルのデータを取得する
         return $this->belongsTo(Category::class);
@@ -51,49 +58,90 @@ class Anime extends Model
         return $star;
     }
     
-    // 50音順並び替え
-    public static function OrderByJapaneseOrder($JapaneseOrderSortId = null, $perPage = 10){
-        $query = self::query();
-        if($JapaneseOrderSortId !== null){
-            return $query->orderBy('Hiragana_title')->get();
+    // ページタイトルの変更
+    public static function pageTitle(
+        $categoryId = null,
+        $originalId = null,
+        $BroadStartSortAscFlg = null,
+        $BroadStartSortDescFlg = null,
+        $JapaneseOrderSortFlg = null,
+        $escapeWord = null,
+        ){
+        if ($categoryId !== null) {
+            $pageTitle = "カテゴリー検索ページ";
+        } else if ($originalId !== null) {
+            $pageTitle = "原作検索ページ";
+        } else if ($escapeWord !== null){
+            $pageTitle = "タイトル検索ページ";
+        } else if ($BroadStartSortAscFlg !== null) {
+            $pageTitle = "放送日古い順ページ";
+        } else if ($BroadStartSortDescFlg !== null){
+            $pageTitle = "放送日新しい順ページ";
+        } else if ($JapaneseOrderSortFlg !== null){
+            $pageTitle = "50音順ページ";
+        }else {
+            $pageTitle = "アニメ TOPランキング";
         }
-        return $query->paginate($perPage);
+        return $pageTitle;
     }
     
-    // 放送日順並び替え
-    public static function OrderByBroadcastStart($BroadStartSortAscId = null, $BroadStartSortDescId = null, $perPage = 10){
-        $query = self::query();
-        if ($BroadStartSortAscId !== null) {
-            return $query->orderBy('first_broadcast_start_date')->get();
-        } else if($BroadStartSortDescId !== null){
-            return $query->orderBy('first_broadcast_start_date','DESC')->get();
-        }
-        return $query->paginate($perPage);
-    }
+    // 特定の検索の場合に順位を非表示
+    // public static function RankingSearchPageTitleFlag(
+    //     $categoryId = null,
+    //     $originalId = null,
+    //     $BroadStartSortAscFlg = null,
+    //     $BroadStartSortDescFlg = null,
+    //     $JapaneseOrderSortFlg = null,
+    //     $escapeWord = null,
+    //     ){
+    //     $pageTitle = self::pageTitle(
+    //         $categoryId,
+    //         $originalId,
+    //         $BroadStartSortAscFlg,
+    //         $BroadStartSortDescFlg,
+    //         $JapaneseOrderSortFlg,
+    //         $escapeWord
+    //         );
+    //     if($pageTitle === "放送日古い順ページ" || $pageTitle === "放送日新しい順ページ" || $pageTitle === "50音順ページ"){
+    //         $pageTitleFlg = true;
+    //     } else {
+    //         $pageTitleFlg = false;
+    //     }
+    //     return $pageTitleFlg;
+    // }
     
     // アニメカテゴリー絞り込み
-    public static function filteredByCategoryAndOriginalIdOrderedByAverageStars($categoryId = null, $originalId = null, $perPage = 10)
-    {
+    public static function filteredByCategoryAndOriginalOrderedByAverageStars(
+        $categoryId = null,
+        $originalId = null,
+        $BroadStartSortAscFlg = null,
+        $BroadStartSortDescFlg = null,
+        $JapaneseOrderSortFlg = null,
+        $escapeWord = null,
+        $perPage = 10
+        ){
         $query = self::query();
-        $animes = $query->withAvg('reviews', 'star')->orderByDesc('reviews_avg_star');
-         if ($categoryId !== null) {
+        if ($BroadStartSortAscFlg !== null) {
+            $query->orderBy('first_broadcast_start_date');
+        } else if ($BroadStartSortDescFlg !== null){
+            $query->orderBy('first_broadcast_start_date','DESC');
+        } else if ($JapaneseOrderSortFlg !== null){
+            $query->orderBy('Hiragana_title');
+        } else {
+            $query->withAvg('reviews', 'star')->orderByDesc('reviews_avg_star');
+        }
+        // カテゴリー、原作の絞り込み
+        if ($categoryId !== null) {
             $query->where('category_id', $categoryId);
         }
         if ($originalId !== null) {
             $query->where('original_id', $originalId);
         }
+        if ($escapeWord !== null){
+            $query->where('title', 'like', '%' . $escapeWord . '%')
+                    ->orWhere('Hiragana_title', 'like', '%' . $escapeWord . '%')
+                    ->orWhere('Latin_alphabet_title', 'like', '%' . $escapeWord . '%');
+        }
         return $query->paginate($perPage);
     }
-    
-    // public static function OrderByBroadcastStartAndJapaneseOrder($BroadStartSortAscId = null, $BroadStartSortDescId = null, $JapaneseOrderSortId = null, $perPage = 10){
-    //     $query = self::query();
-    //     if ($BroadStartSortAscId !== null) {
-    //         return $query->orderBy('first_broadcast_start_date')->get();
-    //     } else if($BroadStartSortDescId !== null){
-    //         return $query->orderBy('first_broadcast_start_date','DESC')->get();
-    //     } else if($JapaneseOrderSortId !== null){
-    //         return $query->orderBy('Hiragana_title')->get();
-    //     }
-    //     return $query->paginate($perPage);
-    // }
 }

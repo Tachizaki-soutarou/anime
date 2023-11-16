@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,13 +19,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth']], function(){
 
+// TOP画面、検索後の画面遷移
 Route::get('/', [AnimeController::class, 'index'])->name('index');
 
+// アニメの詳細情報へ遷移
 Route::get('/animes/{anime}', [AnimeController::class, 'show']);
 
+// アニメの口コミ画面へ遷移
 Route::get('/animes/{anime}/create', [ReviewController::class, 'create']);
 
+// アニメの口コミ登録処理
 Route::post('/animes/{anime}/create_review', [ReviewController::class, 'store']);
+
+// ニックネームクリック時にマイページ画面へ遷移
+Route::get('users/mypage', [UserController::class, 'showMyPage']);
 
 Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
