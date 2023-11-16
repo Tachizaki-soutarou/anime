@@ -14,6 +14,12 @@ class ReviewController extends Controller{
     }
     
     public function store(Request $request, Anime $anime, Review $review){
+        
+        $request->validate([
+        "review.star" => "required|integer|between:1,5",  
+        "review.comment" => "required|string|between:2,200"
+        ]);  
+        
         $input = $request['review'];
         $input['anime_id'] = $anime->id;
         $input['user_id'] = Auth::id();
