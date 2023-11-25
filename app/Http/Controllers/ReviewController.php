@@ -23,7 +23,6 @@ class ReviewController extends Controller{
         $input = $request['review'];
         $input['anime_id'] = $anime->id;
         $input['user_id'] = Auth::id();
-        // dd($input);
         // reviewsテーブルにレビューを登録する処理
         $review->fill($input)->save();
         // 登録に成功したレビューに紐づくアニメ詳細画面に遷移
