@@ -17,10 +17,29 @@
                 <p class="ml-4">{{ !empty($anime->third_broadcast_start_date) ? "第3期：" . $anime->third_broadcast_start_date->format('Y/m/d') : "" }}</p>
                 <p class="ml-4">{{ !empty($anime->fourth_broadcast_start_date) ? "第4期：" . $anime->fourth_broadcast_start_date->format('Y/m/d') : "" }}</p>
             </div>
+            <div class="anime_movie mb-4">
+                <p class="font-semibold">{{ !empty($anime->first_movie) ? "映画" : "" }}</p>
+                <p class="ml-4">{{ !empty($anime->first_movie) ? $anime->first_movie : "" }}</p>
+                <p class="ml-4">{{ !empty($anime->second_movie) ? $anime->second_movie : "" }}</p>
+                <p class="ml-4">{{ !empty($anime->third_movie) ? $anime->third_movie : "" }}</p>
+                <p class="ml-4">{{ !empty($anime->fourth_movie) ? $anime->fourth_movie : "" }}</p>
+                </br>
+                <p class="text-sm">{{ !empty($anime->first_movie) ? "※実写版、総集編は対象ではありません" : "" }}</p>
+            </div>
             <div class="anime_synopsis mb-4">
                 <h3 class="text-2xl font-semibold mb-2">あらすじ</h3>
                 <p class="text-gray-700 leading-relaxed">{!! nl2br(e($anime->synopsis)) !!}</p>
             </div>
+        </div>
+        <div>
+            <form action="/animes/{{ $anime->id }}/favorite" method="POST">
+            @csrf
+                @if($favoriteFlg)
+                    <button type="submit" name="favoriteAnimeId" value="{{ $anime->id }}" onclick="fovoriteDestroy()">お気に入り：💖</button>
+                @else
+                    <button type="submit" name="favoriteAnimeId" value="{{ $anime->id }}" onclick="fovoriteCreate()">お気に入り：💙</button>
+                @endif
+            </form>
         </div>
         <div class="create_anime mb-6 text-center">
             <a href='/animes/{{ $anime->id }}/create' class="bg-indigo-600 text-black px-6 py-2 rounded-lg transform transition hover:scale-105 hover:bg-indigo-700 shadow-lg">
@@ -40,4 +59,8 @@
             <a href="/" class="text-indigo-600 hover:underline">戻る</a>
         </div>
     </div>
+    <!-- javaScriptの記述 -->
+    <script>
+    
+    </script>
 </x-app-layout>

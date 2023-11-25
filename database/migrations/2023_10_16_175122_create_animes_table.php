@@ -21,13 +21,18 @@ return new class extends Migration
             $table->string('Hiragana_title')->unique();
             //アニメ名（ローマ字）
             $table->string('Latin_alphabet_title')->unique();
-             //アニメトップ画像　ユニーク制約
+            //アニメトップ画像　ユニーク制約
             $table->longText('image')->nullable();
             //アニメ放送開始日
             $table->timestamp('first_broadcast_start_date')->nullable();
             $table->timestamp('second_broadcast_start_date')->nullable();
             $table->timestamp('third_broadcast_start_date')->nullable();
             $table->timestamp('fourth_broadcast_start_date')->nullable();
+            //映画情報
+            $table->string('first_movie')->nullable();
+            $table->string('second_movie')->nullable();
+            $table->string('third_movie')->nullable();
+            $table->string('fourth_movie')->nullable();
             //あらすじ
             $table->text('synopsis');
             //原作テーブル参照

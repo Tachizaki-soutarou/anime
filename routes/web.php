@@ -31,6 +31,18 @@ Route::get('/animes/{anime}/create', [ReviewController::class, 'create']);
 // アニメの口コミ登録処理
 Route::post('/animes/{anime}/create_review', [ReviewController::class, 'store']);
 
+// アニメのお気に入り登録処理
+Route::post('/animes/{anime}/favorite', [AnimeController::class, 'toggleFavorite']);
+
+// 管理者専用アニメ追加登録画面へ遷移
+Route::get('/admin/create', [AnimeController::class, 'adminAnimeCreate']);
+
+// 管理者専用アニメ追加登録処理
+Route::Post('/admin/store', [AnimeController::class, 'adminAnimeStore']);
+
+// 管理者専用アニメ編集画面へ遷移
+Route::get('/admin/edit', [AnimeController::class, 'adminAnimeEdit']);
+
 // ニックネームクリック時にマイページ画面へ遷移
 Route::get('users/mypage', [UserController::class, 'showMyPage']);
 
@@ -48,6 +60,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+// Language Switcher Route 言語切替用ルートだよ
+Route::get('language/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+
+    return redirect()->back();
+});
