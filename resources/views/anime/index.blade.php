@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <label for="animesWord" class="font-semibold text-gray-700 mb-2">タイトル</label>        
-                <input type="text" name="animesWord" value="{{ old('animesWord', $animesWord ?? '') }}">
+                <input type="text" name="animesWord" value="{{  (old('animesWord', $animesWord ?? '') == $animesWord) ? $animesWord : '' }}">
                 <label for="orderBy">並び替え</label>
                 <select name="orderByControl" onclick="sortClick()">
                     <option value="">指定なし</option>
@@ -40,11 +40,11 @@
                 </select>
                 <button type="submit" class="mt-4 px-6 py-3 bg-pink-500 text-black font-bold rounded-full hover:bg-pink-600 focus:outline-none focus:bg-pink-700">検索</button>
             </form>
-            <form action="/admin/create" method="GET">
+            <form action="/create" method="GET">
                 <button type="submit">アニメ追加ボタン</button>
             </form>
-            <form action="/admin/edit" method="GET">
-                <button type="submit">アニメ編集ボタン</button>
+            <form action="/createCategory" method="GET">
+                <button type="submit">アニメカテゴリー追加ボタン</button>
             </form>
         </div>
         <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10'>
@@ -56,6 +56,9 @@
                     <span class="text-sm">🌟：{{ !empty($anime->reviews_avg_star) ? floor($anime->reviews_avg_star * 10) / 10 : "評価はまだありません"}}</span></br>
                     <span class="text-sm">💖：{{ $anime->favored_by_users_count }} &emsp; </spam>
                     <span class="text-sm">💬：{{ $anime->reviews_count }} </span>
+                    <form action="/edit/{{ $anime->id }}" method="GET">
+                        <button type="submit">アニメ編集ボタン</button>
+                    </form>
                 </div>
             @empty
                 <p class="nullAnimes" style="text-align:center; font-weight:bold; font-size:120%; text-shadow:1px 1px 1px #666; color:red; padding:4px;">該当するアニメはありません！</p>
