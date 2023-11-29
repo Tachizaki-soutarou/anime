@@ -24,11 +24,12 @@
                 <p class="ml-4">{{ !empty($anime->third_movie) ? $anime->third_movie : "" }}</p>
                 <p class="ml-4">{{ !empty($anime->fourth_movie) ? $anime->fourth_movie : "" }}</p>
                 </br>
-                <p class="text-sm">{{ !empty($anime->first_movie) ? "※実写版、総集編は対象ではありません" : "" }}</p>
+                <p class="text-xs">{{ !empty($anime->first_movie) ? "※実写版、総集編は対象ではありません" : "" }}</p>
             </div>
             <div class="anime_synopsis mb-4">
                 <h3 class="text-2xl font-semibold mb-2">あらすじ</h3>
-                <p class="text-gray-700 leading-relaxed">{!! nl2br(e($anime->synopsis)) !!}</p>
+                <p id="animeSynopsis" class="text-gray-700 leading-relaxed">{!! nl2br(e($anime->synopsis)) !!}</p>
+                <button id="synopsisBtn" onclick="clickSynopsisBtn()">あらすじを表示する</button>
             </div>
         </div>
         <div>
@@ -61,6 +62,22 @@
     </div>
     <!-- javaScriptの記述 -->
     <script>
-    
+        document.getElementById("animeSynopsis").style.display ="none";
+        
+        function clickSynopsisBtn(){
+        	const animeSynopsisId = document.getElementById("animeSynopsis");
+        	const synopsisBtnId = document.getElementById("synopsisBtn");
+        
+        	if(animeSynopsisId.style.display === "block"){
+        		// noneで非表示
+        		animeSynopsisId.style.display ="none";
+        		synopsisBtnId.innerText = "あらすじを表示する";
+        		
+        	}else{
+        		// blockで表示
+        		animeSynopsisId.style.display ="block";
+        		synopsisBtnId.innerText = "あらすじを非表示にする";
+        	}
+        }
     </script>
 </x-app-layout>

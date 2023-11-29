@@ -102,7 +102,7 @@ class AnimeController extends Controller{
     }
     
     // 管理者専用アニメ追加画面へ遷移
-    public function adminAnimeCreate (Anime $anime, Category $category, Original $original, Request $request){
+    public function create (Anime $anime, Category $category, Original $original){
         return view('anime.create')->with([
             'anime' => $anime,
             // カテゴリー、原作検索のドロップダウン
@@ -112,37 +112,51 @@ class AnimeController extends Controller{
     }
     
     // 管理者専用アニメ追加処理
-    public function adminAnimeStore (Anime $anime, Category $category, Original $original, Request $request){
-        // // リクエストから 'title' パラメータを取得します
-        // $title = $request->filled('title');
-        // // リクエストから 'Hiragana_title' パラメータを取得します
-        // $HiraganaTitle = $request->filled('Hiragana_title');
-        // // リクエストから 'Latin_alphabet_title' パラメータを取得します
-        // $LatinAlphabetTitle = $request->filled('Latin_alphabet_title');
-        // // リクエストから 'first_broadcast_start_date' パラメータを取得します
-        // $firstBroadcastStartDate = $request->filled('first_broadcast_start_date');
-        // // リクエストから 'second_broadcast_start_date' パラメータを取得します
-        // $secondBroadcastStartDate = $request->filled('second_broadcast_start_date') ? $request->second_broadcast_start_date : null;
-        // // リクエストから 'third_broadcast_start_date' パラメータを取得します
-        // $thirdBroadcastStartDate = $request->filled('third_broadcast_start_date') ? $request->third_broadcast_start_date : null;
-        // // リクエストから 'fourth_broadcast_start_date' パラメータを取得します
-        // $fourthBroadcastStartDate = $request->filled('fourth_broadcast_start_date') ? $request->fourth_broadcast_start_date : null;
-        // // リクエストから 'synopsis' パラメータを取得します
-        // $synopsis = $request->filled('synopsis');
-        // // リクエストから 'category' パラメータを取得します
-        // $categoryId = $request->filled('category_id');
-        // // リクエストから 'original' パラメータを取得します
-        // $originalId = $request->filled('original_id');
+    public function store (Anime $anime, Category $category, Original $original, Request $request){
+        
+        // $request->validate([
+        //     'anime.title' => 'required',
+        //     'anime.Hiragana_title' => 'required',
+        //     'anime.Latin_alphabet_title' => 'required',
+        //     'anime.first_broadcast_start_date' => 'required',
+        //     'anime.synopsis' => 'required|string|max:300',
+        //     'anime.category_id' => 'required',
+        //     'anime.original_id' => 'required',
+        // ]);
         
         $input = $request['anime'];
         $anime->fill($input)->save();
         return redirect('/');
     }
     
+    // 管理者専用アニメカテゴリー追加画面へ遷移
+    public function createCategory (Category $category, Request $request){
+        return view('anime.createCategory')->with([
+            'allCategories' => $category->get()
+            ]);
+    }
+    
+    // 管理者専用アニメカテゴリー追加処理
+    public function storeCategory (Category $category, Request $request){
+        $category->category_name = $request->category_name;
+        $category->save();
+        return redirect('/');
+    }
+    
     // 管理者専用アニメ編集画面へ遷移
-    public function adminAnimeEdit (Anime $anime){
+    public function edit (Anime $anime,Category $category, Original $original,){
         return view('anime.edit')->with([
             'anime' => $anime,
+            // カテゴリー、原作検索のドロップダウン
+            'dropDownCategories' => $category->get(),
+            'dropDownOriginals' => $original->get()
         ]);
+    }
+    
+    // 管理者専用アニメ編集処理
+    public function update (Anime $anime, Request $request){
+        $input = $request['anime'];
+        $anime->fill($input)->save();
+        return redirect('/animes/' . $anime->id);
     }
 }

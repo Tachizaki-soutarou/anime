@@ -35,13 +35,22 @@ Route::post('/animes/{anime}/create_review', [ReviewController::class, 'store'])
 Route::post('/animes/{anime}/favorite', [AnimeController::class, 'toggleFavorite']);
 
 // 管理者専用アニメ追加登録画面へ遷移
-Route::get('/admin/create', [AnimeController::class, 'adminAnimeCreate']);
+Route::get('/create', [AnimeController::class, 'create']);
 
 // 管理者専用アニメ追加登録処理
-Route::Post('/admin/store', [AnimeController::class, 'adminAnimeStore']);
+Route::Post('/store', [AnimeController::class, 'store']);
+
+// 管理者専用アニメカテゴリー追加登録画面へ遷移
+Route::get('/createCategory', [AnimeController::class, 'createCategory']);
+
+// 管理者専用アニメカテゴリー追加登録処理
+Route::Post('/storeCategory', [AnimeController::class, 'storeCategory']);
 
 // 管理者専用アニメ編集画面へ遷移
-Route::get('/admin/edit', [AnimeController::class, 'adminAnimeEdit']);
+Route::get('/edit/{anime}', [AnimeController::class, 'edit']);
+
+// 管理者専用アニメ編集処理
+Route::put('/update/{anime}', [AnimeController::class, 'update']);
 
 // ニックネームクリック時にマイページ画面へ遷移
 Route::get('users/mypage', [UserController::class, 'showMyPage']);
