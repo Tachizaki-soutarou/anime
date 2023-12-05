@@ -37,8 +37,6 @@ return new class extends Migration
             $table->text('synopsis');
             //原作テーブル参照
             $table->foreignId('original_id')->constrained('originals')->onDelete('CASCADE');
-            //カテゴリーテーブル参照
-            $table->foreignId('category_id')->constrained('categories')->onDelete('CASCADE');
             //作成日時 & 更新日時
             $table->timestamps();
             //削除フラグ

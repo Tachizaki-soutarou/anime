@@ -35,10 +35,10 @@ Route::post('/animes/{anime}/create_review', [ReviewController::class, 'store'])
 Route::post('/animes/{anime}/favorite', [AnimeController::class, 'toggleFavorite']);
 
 // 管理者専用アニメ追加登録画面へ遷移
-Route::get('/create', [AnimeController::class, 'create']);
+Route::get('/anime/create', [AnimeController::class, 'create']);
 
 // 管理者専用アニメ追加登録処理
-Route::Post('/store', [AnimeController::class, 'store']);
+Route::Post('/anime/store', [AnimeController::class, 'store']);
 
 // 管理者専用アニメカテゴリー追加登録画面へ遷移
 Route::get('/createCategory', [AnimeController::class, 'createCategory']);

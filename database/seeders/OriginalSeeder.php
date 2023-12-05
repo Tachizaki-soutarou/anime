@@ -21,6 +21,9 @@ class OriginalSeeder extends Seeder
                 ],
                 [
                     'original_name' => '小説'
+                ],
+                [
+                    'original_name' => 'アニメ'
                 ]
          ]);
     }

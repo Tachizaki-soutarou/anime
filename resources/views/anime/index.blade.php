@@ -40,7 +40,7 @@
                 </select>
                 <button type="submit" class="mt-4 px-6 py-3 bg-pink-500 text-black font-bold rounded-full hover:bg-pink-600 focus:outline-none focus:bg-pink-700">検索</button>
             </form>
-            <form action="/create" method="GET">
+            <form action="/anime/create" method="GET">
                 <button type="submit">アニメ追加ボタン</button>
             </form>
             <form action="/createCategory" method="GET">

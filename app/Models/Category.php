@@ -19,6 +19,6 @@ class Category extends Model
     ];
     
     public function animes(){
-        return $this->hasMany(Anime::class);
+        return $this->belongsToMany(Anime::class, 'anime_category');
     }
 }

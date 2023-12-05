@@ -1,6 +1,6 @@
 <x-app-layout>
     <h1>アニメ追加画面</h1>
-        <form action="/store" method="POST">
+        <form action="/anime/store" method="POST">
             @csrf
                 <div class="title">
                     <h2>アニメタイトル</h2>
@@ -49,11 +49,18 @@
                 </div>
                 <div class="synopsis">
                     <h2>口コミ内容</h2>
-                    <textarea rows="10" cols="120" name="anime[synopsis]" placeholder="あらすじ" {{ old('anime.synopsis') }}></textarea>
+                    <textarea rows="10" cols="150" name="anime[synopsis]" placeholder="あらすじ" {{ old('anime.synopsis') }}></textarea>
                 </div>
                 <div class="categories">
                     <h2>カテゴリー</h2>
-                    <select class="categories" name="anime[category_id]">
+                    <select style="width: 250px" name="anime_category[category_id][]">
+                        @foreach ($dropDownCategories as $categories)
+                            <option value="{{ $categories->id }}">
+                                {{ $categories->category_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <select style="width: 250px" name="anime_category[category_id][]">
                         @foreach ($dropDownCategories as $categories)
                             <option value="{{ $categories->id }}">
                                 {{ $categories->category_name }}
@@ -76,4 +83,19 @@
     <div class="footer">
         <a href="/">戻る</a>
     </div>
+    
+    <sprict>
+        {{-- $("select2html").select2({
+          placeholder: "カテゴリー選択",
+        multiple: true,
+        allowClear: true,
+        maximumSelectionLength: 2,
+        closeOnSelect: false,
+        language: 'ja'
+        });
+        
+        var first = "";
+        $(".pref-select").val(first).trigger("change"); --}}
+    </sprict>
+    
 </x-app-layout>
