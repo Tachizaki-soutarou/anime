@@ -45,4 +45,8 @@ class User extends Authenticatable
     public function favoriteAnimes(){
         return $this->belongsToMany(Anime::class, 'favorites');
     }
+    
+    public function review(){
+        return $this->hasMany(Anime::class);
+    }
 }

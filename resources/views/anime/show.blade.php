@@ -7,8 +7,17 @@
             <div class="mb-4 text-xl">
                 <h1>総評価：{{ !empty($star_average) ? $star_average : "評価はまだありません" }}</h1>
             </div>
-            <div class="mb-4 text-xl">
-                ジャンル：{{$anime->category->category_name}}
+            <div class="mb-4">
+                <p class="font-semibold">カテゴリー</p>
+                <ul class="ml-4">
+                    @foreach ($anime->categories as $category)
+                        <li> {{ $category->category_name }} </li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="mb-4">
+                <p class="font-semibold">原作</p>
+                <p class="ml-4">{{ $anime->original->original_name }}</p>
             </div>
             <div class="anime_broadcast_start_date mb-4">
                 <p class="font-semibold">放送開始日</p>
@@ -51,8 +60,9 @@
         <div class="reviews">
             @foreach ($reviews as $review)
                 <div class='anime_reviews bg-gray-100 p-4 rounded mb-4'>
-                     <h2 class='star text-xl font-semibold mb-2'>星の数：{{$review->star}}</h2>
-                     <p class="text-gray-700">{{ $review->comment }}</p>
+                    <p>{{ $review->user->nick_name }} さん</p>
+                    <h2 class='star text-xl font-semibold mb-2'>星の数：{{$review->star}}</h2>
+                    <p class="text-gray-700">{{ $review->comment }}</p>
                  </div>
             @endforeach
         </div>

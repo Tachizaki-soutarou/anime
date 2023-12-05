@@ -49,11 +49,18 @@
             </div>
             <div class="synopsis">
                 <h2>口コミ内容</h2>
-                <textarea rows="10" cols="120" name="anime[synopsis]" placeholder="あらすじ">{{ $anime->synopsis }}</textarea>
+                <textarea rows="10" cols="150" name="anime[synopsis]" placeholder="あらすじ">{{ $anime->synopsis }}</textarea>
             </div>
             <div class="categories">
                 <h2>カテゴリー</h2>
-                <select class="categories" name="anime[category_id]">
+                <select class="categories" name="anime_category[category_id][]">
+                    @foreach ($dropDownCategories as $categories)
+                        <option value="{{ $categories->id }}">
+                            {{ $categories->category_name }}
+                        </option>
+                    @endforeach
+                </select>
+                <select class="categories" name="anime_category[category_id][]">
                     @foreach ($dropDownCategories as $categories)
                         <option value="{{ $categories->id }}">
                             {{ $categories->category_name }}

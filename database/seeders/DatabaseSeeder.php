@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             OriginalSeeder::class,
             AnimeSeeder::class,
-            ReviewSeeder::class
+            ReviewSeeder::class,
+            AnimeCategorySeeder::class
         ]);
         // \App\Models\User::factory(10)->create();
         // \App\Models\User::factory()->create([

@@ -60,8 +60,6 @@ class AnimeController extends Controller{
             $escapeWord
         );
         
-        // dd($animes);
-        
         return view('anime.index')->with([
             'category_id' => $categoryId,
             'original_id' => $originalId,
@@ -78,6 +76,8 @@ class AnimeController extends Controller{
         // favoritesテーブルにアニメがあるか判定を行います
         $user = auth()->user();
         $isFavorite = $user->favoriteAnimes()->where('anime_id', $anime->id)->exists();
+        
+        // $anime = $anime->load('categories');
         
         return view('anime.show')->with([
             'anime' => $anime,
@@ -113,21 +113,12 @@ class AnimeController extends Controller{
     
     // 管理者専用アニメ追加処理
     public function store (Anime $anime, Category $category, Original $original, Request $request){
-        
-        // $request->validate([
-        //     'anime.title' => 'required',
-        //     'anime.Hiragana_title' => 'required',
-        //     'anime.Latin_alphabet_title' => 'required',
-        //     'anime.first_broadcast_start_date' => 'required',
-        //     'anime.synopsis' => 'required|string|max:300',
-        //     'anime.category_id' => 'required',
-        //     'anime.original_id' => 'required',
-        // ]);
-        
-        $input = $request['anime'];
-        $anime->fill($input)->save();
+        $anime_data = $request->input('anime', []);
+        $categories = $request->input('anime_category.category_id', []);
+        $anime->fill($anime_data)->save();
+        $anime->categories()->sync($categories);
         return redirect('/');
-    }
+    } 
     
     // 管理者専用アニメカテゴリー追加画面へ遷移
     public function createCategory (Category $category, Request $request){
@@ -155,8 +146,13 @@ class AnimeController extends Controller{
     
     // 管理者専用アニメ編集処理
     public function update (Anime $anime, Request $request){
-        $input = $request['anime'];
-        $anime->fill($input)->save();
+        // $input = $request['anime'];
+        // $anime->fill($input)->save();
+        // $anime->categories()->sync($input['category_id']);
+        $anime_data = $request->input('anime', []);
+        $categories = $request->input('anime_category.category_id', []);
+        $anime->fill($anime_data)->save();
+        $anime->categories()->sync($categories);
         return redirect('/animes/' . $anime->id);
     }
 }
