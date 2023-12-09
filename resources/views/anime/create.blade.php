@@ -15,6 +15,10 @@
                     <h2>アニメアルファベットタイトル</h2>
                     <input type="text" size="60" name="anime[Latin_alphabet_title]" placeholder="アルファベットタイトル" value="{{ old('anime.Latin_alphabet_title') }}"/>
                 </div>
+                <div class="english_title">
+                    <h2>アニメ英語タイトル</h2>
+                    <input type="text" size="60" name="anime[english_title]" placeholder="英語タイトル" value="{{ old('anime.english_title') }}"/>
+                </div>
                 <div class="first_broadcast_start_date">
                     <h2>第1期</h2>
                     <input type="date" name="anime[first_broadcast_start_date]" placeholder="第1期" value="{{ old('anime.first_broadcast_start_date') }}"/>

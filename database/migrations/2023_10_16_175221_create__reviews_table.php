@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->integer('star');            //星の数
+            $table->String('comment_title');    //コメントタイトル
             $table->String('comment');          //コメント
             $table->foreignId('user_id')->constrained('users')->onDelete('CASCADE');//ユーザーテーブル参照
             $table->foreignId('anime_id')->constrained('animes')->onDelete('CASCADE');//アニメテーブル参照

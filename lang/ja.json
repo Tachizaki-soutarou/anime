@@ -1,5 +1,13 @@
 {
     "Name": "名前",
+    "Last Name": "姓",
+    "First Name": "名",
+    "Nick Name": "ニックネーム",
+    "Birth Date": "生年月日",
+    "Sex": "性別",
+    "Female": "女性",
+    "Male": "男性",
+    "Other": "指定なし",
     "Profile": "アカウント",
     "Profile Information": "アカウント情報",
     "Cancel": "キャンセル",

@@ -132,6 +132,69 @@ class AnimeCategorySeeder extends Seeder
                 [
                     'anime_id' => 13,
                     'category_id' => 9
+                ],
+                // からかい上手の高木さん
+                [
+                    'anime_id' => 14,
+                    'category_id' => 8
+                ],
+                [
+                    'anime_id' => 14,
+                    'category_id' => 10
+                ],
+                // 無職転生 ～異世界行ったら本気だす～
+                [
+                    'anime_id' => 15,
+                    'category_id' => 1
+                ],
+                [
+                    'anime_id' => 15,
+                    'category_id' => 3
+                ],
+                // コードギアス 反逆のルルーシュ
+                [
+                    'anime_id' => 16,
+                    'category_id' => 2
+                ],
+                [
+                    'anime_id' => 16,
+                    'category_id' => 11
+                ],
+                // チェンソーマン
+                [
+                    'anime_id' => 17,
+                    'category_id' => 2
+                ],
+                [
+                    'anime_id' => 17,
+                    'category_id' => 3
+                ],
+                // Re:ゼロから始める異世界生活
+                [
+                    'anime_id' => 18,
+                    'category_id' => 2
+                ],
+                [
+                    'anime_id' => 18,
+                    'category_id' => 3
+                ],
+                // 五等分の花嫁
+                [
+                    'anime_id' => 19,
+                    'category_id' => 8
+                ],
+                [
+                    'anime_id' => 19,
+                    'category_id' => 10
+                ],
+                // ノーゲーム・ノーライフ
+                [
+                    'anime_id' => 20,
+                    'category_id' => 1
+                ],
+                [
+                    'anime_id' => 20,
+                    'category_id' => 4
                 ]
          ]);
     }

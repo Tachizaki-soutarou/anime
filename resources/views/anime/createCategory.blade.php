@@ -1,6 +1,6 @@
 <x-app-layout>
     <h1>アニメカテゴリー追加画面</h1>
-        <form action="/storeCategory" method="POST">
+        <form action="/category/store" method="POST">
             @csrf
                 <div class="Category">
                     <h2>現在のカテゴリー</h2>

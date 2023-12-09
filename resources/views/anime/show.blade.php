@@ -1,8 +1,7 @@
 <x-app-layout>
     <div class="max-w-4xl mx-auto p-4 md:p-8">
-        <h1 class="text-4xl font-bold mb-6">
-            {{ $anime->title }}
-        </h1>
+        <p class="text-4xl font-bold">{{ $anime->title }}</p>
+        <p class="text-xs mb-6">{{ $anime->english_title }}</p>
         <div class="content mb-8">
             <div class="mb-4 text-xl">
                 <h1>総評価：{{ !empty($star_average) ? $star_average : "評価はまだありません" }}</h1>
@@ -51,6 +50,9 @@
                 @endif
             </form>
         </div>
+        <div class="footer mb-8 mt-4">
+            <a href="/" class="text-indigo-600 hover:underline">戻る</a>
+        </div>
         <div class="create_anime mb-6 text-center">
             <a href='/animes/{{ $anime->id }}/create' class="bg-indigo-600 text-black px-6 py-2 rounded-lg transform transition hover:scale-105 hover:bg-indigo-700 shadow-lg">
                 口コミを投稿してみませんか？
@@ -60,14 +62,12 @@
         <div class="reviews">
             @foreach ($reviews as $review)
                 <div class='anime_reviews bg-gray-100 p-4 rounded mb-4'>
-                    <p>{{ $review->user->nick_name }} さん</p>
-                    <h2 class='star text-xl font-semibold mb-2'>星の数：{{$review->star}}</h2>
+                    <span class='text-xl font-semibold mb-2'>星 {{$review->star}}</span>
+                    <span class='text-xl font-semibold mb-2'>：{{ $review->comment_title }}</span>
                     <p class="text-gray-700">{{ $review->comment }}</p>
+                    <p>{{ $review->user->nick_name }} さん</p>
                  </div>
             @endforeach
-        </div>
-        <div class="footer mb-8 mt-4">
-            <a href="/" class="text-indigo-600 hover:underline">戻る</a>
         </div>
     </div>
     <!-- javaScriptの記述 -->

@@ -17,59 +17,12 @@ class ReviewSeeder extends Seeder
     {
         DB::table('reviews')->insert([
             [
-                'star' => '2',
-                'comment' => 'かっこいい',
-                'user_id' => '1',
-                'anime_id' => '1'
-            ],
-            [
-                'star' => '3',
-                'comment' => 'すごくかっこいい',
-                'user_id' => '1',
-                'anime_id' => '1'
-            ],
-            [
                 'star' => '4',
-                'comment' => '超かっこいい',
-                'user_id' => '1',
-                'anime_id' => '1'
-            ],
-            [
-                'star' => '3',
-                'comment' => 'おもしろい',
+                'comment_title' => 'マジで好き',
+                'comment' => 'キャラの絵がかわいい',
                 'user_id' => '1',
                 'anime_id' => '2'
-            ],
-            [
-                'star' => '3',
-                'comment' => 'すごくおもしろい',
-                'user_id' => '1',
-                'anime_id' => '2'
-            ],
-            [
-                'star' => '4',
-                'comment' => '超おもしろい',
-                'user_id' => '1',
-                'anime_id' => '2'
-            ],
-            [
-                'star' => '4',
-                'comment' => 'かわいい',
-                'user_id' => '1',
-                'anime_id' => '3'
-            ],
-            [
-                'star' => '5',
-                'comment' => 'すごくかわいい',
-                'user_id' => '1',
-                'anime_id' => '3'
-            ],
-            [
-                'star' => '5',
-                'comment' => '超かわいい',
-                'user_id' => '1',
-                'anime_id' => '3'
-            ],
+            ]
          ]);
     }
 }

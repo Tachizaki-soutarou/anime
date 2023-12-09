@@ -17,6 +17,7 @@ class ReviewController extends Controller{
         
         $request->validate([
         "review.star" => "required|integer|between:1,5",  
+        "review.comment_title" => "required|string|between:2,25",
         "review.comment" => "required|string|between:2,200"
         ]);  
         

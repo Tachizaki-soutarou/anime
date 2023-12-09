@@ -28,8 +28,8 @@
                         </select>
                     </div>
                 </div>
-                <label for="animesWord" class="font-semibold text-gray-700 mb-2">タイトル</label>        
-                <input type="text" name="animesWord" value="{{  (old('animesWord', $animesWord ?? '') == $animesWord) ? $animesWord : '' }}">
+                <label for="animesWord" class="font-semibold text-gray-700 mb-2">タイトル(英語でも可)</label>
+                <input type="text" size="40" name="animesWord" value="{{  (old('animesWord', $animesWord ?? '') == $animesWord) ? $animesWord : '' }}">
                 <label for="orderBy">並び替え</label>
                 <select name="orderByControl" onclick="sortClick()">
                     <option value="">指定なし</option>
@@ -43,8 +43,11 @@
             <form action="/anime/create" method="GET">
                 <button type="submit">アニメ追加ボタン</button>
             </form>
-            <form action="/createCategory" method="GET">
+            <form action="/category/create" method="GET">
                 <button type="submit">アニメカテゴリー追加ボタン</button>
+            </form>
+            <form action="/favoriteList" method="GET">
+                <button type="submit">お気に入りリスト</button>
             </form>
         </div>
         <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10'>
@@ -63,7 +66,7 @@
             @empty
                 <p class="nullAnimes" style="text-align:center; font-weight:bold; font-size:120%; text-shadow:1px 1px 1px #666; color:red; padding:4px;">該当するアニメはありません！</p>
             @endforelse
-            {{ $animes->links() }}
+            {{$animes->appends(request()->query())->links()}}
         </div>
     </div>
     <!-- javaScriptの記述 -->
