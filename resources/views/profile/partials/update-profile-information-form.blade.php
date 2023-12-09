@@ -16,15 +16,48 @@
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
-
+        
+        <!-- last_name -->
         <div>
-            <x-input-label for="nick_name" :value="__('ニックネーム')" />
+            <x-input-label for="last_name" :value="__('Last Name')" />
+            <x-text-input id="last_name" name="last_name" type="text" class="mt-1 block w-full" :value="old('last_name', $user->last_name)" required autofocus autocomplete="family-name" />
+            <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
+        </div>
+        
+        <!-- first_name -->
+        <div>
+            <x-input-label for="first_name" :value="__('First Name')" />
+            <x-text-input id="first_name" name="first_name" type="text" class="mt-1 block w-full" :value="old('first_name', $user->first_name)" required autofocus autocomplete="family-name" />
+            <x-input-error class="mt-2" :messages="$errors->get('first_name')" />
+        </div>
+        
+        <!-- nick_name -->
+        <div>
+            <x-input-label for="nick_name" :value="__('Nick Name')" />
             <x-text-input id="nick_name" name="nick_name" type="text" class="mt-1 block w-full" :value="old('nick_name', $user->nick_name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('nick_name')" />
         </div>
+        
+        <!-- birth_date -->
+        <div>
+            <x-input-label for="birth_date" :value="__('Birth Date')" />
+            <x-text-input id="birth_date" name="birth_date" type="date" class="mt-1 block w-full" :value="old('birth_date', $user->birth_date)" required autofocus autocomplete="bday" />
+            <x-input-error class="mt-2" :messages="$errors->get('birth_date')" />
+        </div>
+        
+        <!-- sex -->
+        <div class="mt-4">
+            <x-input-label for="sex" :value="__('Sex')" />
+            <select id="sex" name="sex" class="mt-1 block w-full" :value="old('sex', $user->sex)" required autofocus autocomplete="off">
+                <option value="2">{{ __('Other') }}</option>
+                <option value="0">{{ __('Female') }}</option>
+                <option value="1">{{ __('Male') }}</option>
+            </select>
+            <x-input-error class="mt-2" :messages="$errors->get('sex')" />
+        </div>
 
         <div>
-            <x-input-label for="email" :value="__('Eメール')" />
+            <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 

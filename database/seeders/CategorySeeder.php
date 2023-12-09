@@ -23,7 +23,7 @@ class CategorySeeder extends Seeder
                     'category_name' => 'ダークファンタジー'
                 ],
                 [
-                    'category_name' => 'アクション'
+                    'category_name' => 'アクション/バトル'
                 ],
                 [
                     'category_name' => 'コメディ'
@@ -45,6 +45,9 @@ class CategorySeeder extends Seeder
                 ],
                 [
                     'category_name' => 'ラブコメディ'
+                ],
+                [
+                    'category_name' => 'ロボット/メカ'
                 ]
          ]);
     }

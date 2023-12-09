@@ -41,10 +41,10 @@ Route::get('/anime/create', [AnimeController::class, 'create']);
 Route::Post('/anime/store', [AnimeController::class, 'store']);
 
 // 管理者専用アニメカテゴリー追加登録画面へ遷移
-Route::get('/createCategory', [AnimeController::class, 'createCategory']);
+Route::get('/category/create', [AnimeController::class, 'createCategory']);
 
 // 管理者専用アニメカテゴリー追加登録処理
-Route::Post('/storeCategory', [AnimeController::class, 'storeCategory']);
+Route::Post('/category/store', [AnimeController::class, 'storeCategory']);
 
 // 管理者専用アニメ編集画面へ遷移
 Route::get('/edit/{anime}', [AnimeController::class, 'edit']);
@@ -52,8 +52,11 @@ Route::get('/edit/{anime}', [AnimeController::class, 'edit']);
 // 管理者専用アニメ編集処理
 Route::put('/update/{anime}', [AnimeController::class, 'update']);
 
+// お気に入りリスト画面へ遷移
+Route::get('/favoriteList', [AnimeController::class, 'favoriteList']);
+
 // ニックネームクリック時にマイページ画面へ遷移
-Route::get('users/mypage', [UserController::class, 'showMyPage']);
+// Route::get('users/mypage', [UserController::class, 'showMyPage']);
 
 Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

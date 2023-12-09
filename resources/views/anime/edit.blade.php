@@ -15,6 +15,10 @@
                 <h2>アニメアルファベットタイトル</h2>
                 <input type="text" size="60" name="anime[Latin_alphabet_title]" placeholder="アルファベットタイトル" value="{{ $anime->Latin_alphabet_title }}"/>
             </div>
+            <div class="english_title">
+                <h2>アニメ英語タイトル</h2>
+                <input type="text" size="60" name="anime[english_title]" placeholder="英語タイトル" value="{{ $anime->english_title }}"/>
+            </div>
             <div class="first_broadcast_start_date">
                 <h2>第1期</h2>
                 <input type="date" name="anime[first_broadcast_start_date]" placeholder="第1期" value="{{ $anime->first_broadcast_start_date->format('Y-m-d') }}"/>
@@ -78,7 +82,7 @@
                     @endforeach
                 </select>
             </div>
-        <input type="submit" value="アニメを登録する">
+        <input type="submit" value="アニメを編集する">
     </form>
     <div class="footer">
         <a href="/">戻る</a>

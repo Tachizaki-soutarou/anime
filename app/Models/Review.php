@@ -11,6 +11,7 @@ class Review extends Model
     
     protected $fillable = [
         'star',
+        'comment_title',
         'comment',
         'user_id',
         'anime_id'

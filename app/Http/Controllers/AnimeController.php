@@ -146,13 +146,20 @@ class AnimeController extends Controller{
     
     // 管理者専用アニメ編集処理
     public function update (Anime $anime, Request $request){
-        // $input = $request['anime'];
-        // $anime->fill($input)->save();
-        // $anime->categories()->sync($input['category_id']);
         $anime_data = $request->input('anime', []);
         $categories = $request->input('anime_category.category_id', []);
         $anime->fill($anime_data)->save();
         $anime->categories()->sync($categories);
         return redirect('/animes/' . $anime->id);
+    }
+    
+    // お気に入りリスト画面へ遷移
+    public function favoriteList (Anime $anime, Request $request){
+        $perPage = 20;
+        $user = auth()->user();
+        $favorites = $user->favoriteAnimes()->with('reviews')->paginate($perPage);
+        return view('anime.favoriteList')->with([
+            'animes' => $favorites
+        ]);
     }
 }
