@@ -2,16 +2,15 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex">
+          　<div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="https://soutanime.com">
-                        <!-- カスタムアニメロゴへの変更 -->
-                        <img src="{{ asset('images/logo.png') }}" class="block h-12 w-auto">
+                    <a href="{{ route('index') }}">
+                        <img src="{{ asset('svg/logo.png') }}" class="rounded-full w-11 h-12">
                     </a>
                 </div>
-
-              　 <!-- Navigation Links -->
+            
+                <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('index')" :active="request()->routeIs('index')" class="text-white">
                         {{ __('Index') }}
@@ -24,7 +23,6 @@
                     </x-nav-link>
                 </div>
             </div>
-
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
