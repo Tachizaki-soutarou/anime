@@ -11,9 +11,11 @@
                     <span class="text-sm">🌟：{{ !empty($anime->averageRating()) ? floor($anime->averageRating() * 10) / 10 : "評価はまだありません"}}</span></br>
                     <span class="text-sm">💖：{{ $anime->favoriteCount() }} &emsp; </spam>
                     <span class="text-sm">💬：{{ $anime->reviewCount() }} </span>
+                    @hasanyrole('admin')
                     <form action="/edit/{{ $anime->id }}" method="GET">
                         <button type="submit">アニメ編集ボタン</button>
                     </form>
+                    @endhasanyrole
                 </div>
             @empty
                 <p class="nullAnimes" style="text-align:center; font-weight:bold; font-size:120%; color:red;">お気に入りアニメはありません</p>

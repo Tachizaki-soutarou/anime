@@ -59,14 +59,16 @@
                 <h2>カテゴリー</h2>
                 <select class="categories" name="anime_category[category_id][]">
                     @foreach ($dropDownCategories as $categories)
-                        <option value="{{ $categories->id }}">
+                        <option value="{{ $categories->id }}"
+                            {{ (old('category_id', $anime->categories[0]->id ?? '') == $categories->id) ? 'selected' : '' }}>
                             {{ $categories->category_name }}
                         </option>
                     @endforeach
                 </select>
                 <select class="categories" name="anime_category[category_id][]">
                     @foreach ($dropDownCategories as $categories)
-                        <option value="{{ $categories->id }}">
+                        <option value="{{ $categories->id }}"
+                            {{ (old('category_id', $anime->categories[1]->id ?? '') == $categories->id) ? 'selected' : '' }}>
                             {{ $categories->category_name }}
                         </option>
                     @endforeach
@@ -76,7 +78,8 @@
                 <h2>原作</h2>
                 <select class="originals" name="anime[original_id]">
                     @foreach ($dropDownOriginals as $originals)
-                        <option value="{{ $originals->id }}">
+                        <option value="{{ $originals->id }}"
+                            {{ (old('original_id', $anime->original->id ?? '') == $originals->id) ? 'selected' : '' }}>
                             {{ $originals->original_name }}
                         </option>
                     @endforeach

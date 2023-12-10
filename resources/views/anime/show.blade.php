@@ -62,18 +62,24 @@
         <div class="reviews">
             @foreach ($reviews as $review)
                 <div class='anime_reviews bg-gray-100 p-4 rounded mb-4'>
+                    <p>{{ $review->user->nick_name }} さんの口コミ</p>
                     <span class='text-xl font-semibold mb-2'>星 {{$review->star}}</span>
-                    <span class='text-xl font-semibold mb-2'>：{{ $review->comment_title }}</span>
-                    <p class="text-gray-700">{{ $review->comment }}</p>
-                    <p>{{ $review->user->nick_name }} さん</p>
-                 </div>
+                    <span class='text-xl font-semibold mb-2'>：{{ $review->comment_title }}</span></br>
+                    <p id="animeReviewComment_{{ $review->id }}" class="text-gray-700" style="display: none;">{{ $review->comment }}</p>
+                    <button onclick="clickReviewCommentBtn({{ $review->id }})">コメントを表示/非表示</button>
+                    @hasanyrole('admin')
+                        <form action="/delete/{{ $anime->id }}/{{ $review->id }}" method="POST">
+                            @csrf
+                            <button type="submit" onclick="commentDeleteBtnId()">口コミ削除ボタン</button>
+                        </form>
+                    @endhasanyrole
+                </div>
             @endforeach
         </div>
     </div>
     <!-- javaScriptの記述 -->
     <script>
         document.getElementById("animeSynopsis").style.display ="none";
-        
         function clickSynopsisBtn(){
         	const animeSynopsisId = document.getElementById("animeSynopsis");
         	const synopsisBtnId = document.getElementById("synopsisBtn");
@@ -87,6 +93,23 @@
         		// blockで表示
         		animeSynopsisId.style.display ="block";
         		synopsisBtnId.innerText = "あらすじを非表示にする";
+        	}
+        }
+        
+        function commentDeleteBtnId(){
+            window.confirm("本当に削除しますか？");
+        }
+    
+        function clickReviewCommentBtn($review_id){
+        	const ReviewCommentId = document.getElementById("animeReviewComment_" + $review_id);
+        
+        	if(ReviewCommentId.style.display === "block"){
+        		// noneで非表示
+        		ReviewCommentId.style.display ="none";
+        		
+        	}else{
+        		// blockで表示
+        		ReviewCommentId.style.display ="block";
         	}
         }
     </script>
