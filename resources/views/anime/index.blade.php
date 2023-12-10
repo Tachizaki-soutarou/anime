@@ -58,9 +58,9 @@
                         <a href="/animes/{{ $anime->id }}" class="hover:text-pink-600">{{ $anime->title }}</a>
                     </h2>
                     <div class="p-4">
-                        <span class="text-sm"><i class="fa-solid fa-thumbs-up"></i>：{{ $anime->reviews_avg_star ?? '評価なし' }}</span><br>
-                        <span class="text-sm">💖：{{ $anime->favored_by_users_count }}</span>
-                        <span class="text-sm">💬：{{ $anime->reviews_count }}</span>
+                        <span class="text-sm"><i class="fas fa-star" style="color: orange;"></i>：ごくもんきょう{{ $anime->reviews_avg_star ?? '評価なし' }}</span><br>
+                        <span class="text-sm"><i class="fas fa-heart" style="color: red;"></i>：{{ $anime->favored_by_users_count }}</span>
+                        <span class="text-sm"><i class="fas fa-comment"></i>：{{ $anime->reviews_count }}</span>
                     </div>
                     @can('register')
                         <div class="px-4 py-2">
