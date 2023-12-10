@@ -1,96 +1,80 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-6">
-        <div class="border-t border-gray-200 py-6">
-            <form action="/" method="GET" class="flex flex-col items-center gap-4">
-                <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
-                    <div class="hamburger-menu">
-                        <input type="checkbox" id="menu-btn-check">
-                        <label for="menu-btn-check" class="menu-btn"><span></span></label>
-                        <!--ここからメニュー-->
-                        <div class="menu-content">
-                            <ul>
-                                <li>
-                                    <a href="/dashboard">ダッシュボード</a>
-                                </li>
-                                <li>
-                                    <a href="/">index</a>
-                                </li>
-                                <li>
-                                    <a href="/profile">アカウント</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!--ここまでメニュー-->
-                    </div>
-                    <div class="categories_group text-center">
-                        <label for="category" class="font-semibold text-gray-700 mb-2">カテゴリー</label>
-                        <select class="categories_control form-select block w-60 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="category_id">
-                            <option value="">指定なし</option>
-                            @foreach ($dropDownCategories as $categories)
-                                <option value="{{ $categories->id }}"
-                                    {{ (old('category_id', $category_id ?? '') == $categories->id) ? 'selected' : '' }}>
-                                    {{ $categories->category_name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="originals_group text-center">
-                        <label for="original" class="font-semibold text-gray-700 mb-2">原作</label>
-                        <select class="originals_control form-select block w-60 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="original_id">
-                            <option value="">指定なし</option>
-                            @foreach ($dropDownOriginals as $originals)
-                                <option value="{{ $originals->id }}"
-                                    {{ (old('original_id', $original_id ?? '') == $originals->id) ? 'selected' : '' }}>
-                                    {{ $originals->original_name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+        <div class="flex flex-wrap justify-between items-center mb-6">
+            <!-- 検索フォーム -->
+            <form action="/" method="GET" class="flex flex-wrap gap-4 items-center w-full">
+                <!-- カテゴリー -->
+                <div class="flex-grow">
+                    <label for="category" class="font-semibold text-gray-700">カテゴリー</label>
+                    <select class="form-select block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="category_id">
+                        <option value="">指定なし</option>
+                        @foreach ($dropDownCategories as $category)
+                            <option value="{{ $category->id }}" {{ (old('category_id', $category_id ?? '') == $category->id) ? 'selected' : '' }}>
+                                {{ $category->category_name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
-                <label for="animesWord" class="font-semibold text-gray-700 mb-2">タイトル(英語でも可)</label>
-                <input type="text" size="40" name="animesWord" value="{{  (old('animesWord', $animesWord ?? '') == $animesWord) ? $animesWord : '' }}">
-                <label for="orderBy">並び替え</label>
-                <select name="orderByControl" onclick="sortClick()">
-                    <option value="">指定なし</option>
-                    <option value="1">星の数順</option>
-                    <option value="2">放送開始日古い順</option>
-                    <option value="3">放送開始日新しい順</option>
-                    <option value="4">50音順</option>
-                </select>
-                <button type="submit" class="mt-4 px-6 py-3 bg-pink-500 text-black font-bold rounded-full hover:bg-pink-600 focus:outline-none focus:bg-pink-700">検索</button>
-            </form>
-            @can('register')
-                <form action="/anime/create" method="GET">
-                    <button type="submit">アニメ追加ボタン</button>
-                </form>
-                <form action="/category/create" method="GET">
-                    <button type="submit">アニメカテゴリー追加ボタン</button>
-                </form>
-            @endcan
-            <form action="/favoriteList" method="GET">
-                <button type="submit">お気に入りリスト</button>
+                <!-- 原作 -->
+                <div class="flex-grow">
+                    <label for="original" class="font-semibold text-gray-700">原作</label>
+                    <select class="form-select block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="original_id">
+                        <option value="">指定なし</option>
+                        @foreach ($dropDownOriginals as $original)
+                            <option value="{{ $original->id }}" {{ (old('original_id', $original_id ?? '') == $original->id) ? 'selected' : '' }}>
+                                {{ $original->original_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <!-- タイトル -->
+                <div class="w-1/4">
+                    <label for="animesWord" class="font-semibold text-gray-700">タイトル</label>
+                    <input type="text" class="form-input block w-full rounded-md border-gray-300 shadow-sm" name="animesWord" value="{{ old('animesWord', $animesWord ?? '') }}">
+                </div>
+                <!-- 検索ボタン -->
+                <div class="flex justify-end mt-4">
+                    <button type="submit" class="px-6 py-3 bg-pink-500 text-white font-bold rounded-full hover:bg-pink-600 focus:outline-none focus:bg-pink-700">検索</button>
+                </div>
+                <!-- 並び替え -->
+                <div class="md:w-auto text-right">
+                    <label for="orderByControl" class="font-semibold text-gray-700">並び替え</label>
+                    <select name="orderByControl" class="form-select block w-full md:w-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onchange="this.form.submit()">
+                        <option value="">指定なし</option>
+                        <option value="1">星の数順</option>
+                        <option value="2">放送開始日古い順</option>
+                        <option value="3">放送開始日新しい順</option>
+                        <option value="4">50音順</option>
+                    </select>
+                </div>
             </form>
         </div>
-        <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10'>
+
+        <!-- アニメ一覧表示 -->
+        <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
             @forelse ($animes as $anime)
                 <div class='bg-white shadow-lg rounded-lg overflow-hidden'>
                     <h2 class='text-2xl font-semibold text-gray-700 p-4'>
                         <a href="/animes/{{ $anime->id }}" class="hover:text-pink-600">{{ $anime->title }}</a>
                     </h2>
-                    <span class="text-sm">🌟：{{ !empty($anime->reviews_avg_star) ? floor($anime->reviews_avg_star * 10) / 10 : "評価はまだありません"}}</span></br>
-                    <span class="text-sm">💖：{{ $anime->favored_by_users_count }} &emsp; </spam>
-                    <span class="text-sm">💬：{{ $anime->reviews_count }} </span>
+                    <div class="p-4">
+                        <span class="text-sm"><i class="fa-solid fa-thumbs-up"></i>：{{ $anime->reviews_avg_star ?? '評価なし' }}</span><br>
+                        <span class="text-sm">💖：{{ $anime->favored_by_users_count }}</span>
+                        <span class="text-sm">💬：{{ $anime->reviews_count }}</span>
+                    </div>
                     @can('register')
-                        <form action="/edit/{{ $anime->id }}" method="GET">
-                            <button type="submit">アニメ編集ボタン</button>
-                        </form>
+                        <div class="px-4 py-2">
+                            <a href="/edit/{{ $anime->id }}" class="text-indigo-600 hover:text-indigo-800">アニメ編集</a>
+                        </div>
                     @endcan
                 </div>
             @empty
-                <p class="nullAnimes" style="text-align:center; font-weight:bold; font-size:120%; text-shadow:1px 1px 1px #666; color:red; padding:4px;">該当するアニメはありません！</p>
+                <p class="nullAnimes w-full text-center font-bold text-lg text-red-500">該当するアニメはありません！</p>
             @endforelse
-            {{$animes->appends(request()->query())->links()}}
         </div>
+
+        <!-- ページネーション -->
+        {{$animes->appends(request()->query())->links()}}
     </div>
     <!-- javaScriptの記述 -->
     <script>
@@ -100,6 +84,7 @@
         orderByControl.addEventListener('change', function() {
             // 現在のフォームを取得
             const form = this.closest('form');
+            console.log(form);
             // フォームを送信
             form.submit();
         });

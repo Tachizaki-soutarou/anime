@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/delete/{anime}/{review}', [ReviewController::class, 'commentDelete']);
     
     // お気に入りリスト画面へ遷移
-    Route::get('/favoriteList', [AnimeController::class, 'favoriteList']);
+    Route::get('/favoriteList', [AnimeController::class, 'favoriteList'])->name('favoriteList');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
