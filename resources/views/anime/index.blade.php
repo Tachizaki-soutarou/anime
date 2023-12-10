@@ -3,6 +3,25 @@
         <div class="border-t border-gray-200 py-6">
             <form action="/" method="GET" class="flex flex-col items-center gap-4">
                 <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+                    <div class="hamburger-menu">
+                        <input type="checkbox" id="menu-btn-check">
+                        <label for="menu-btn-check" class="menu-btn"><span></span></label>
+                        <!--ここからメニュー-->
+                        <div class="menu-content">
+                            <ul>
+                                <li>
+                                    <a href="/dashboard">ダッシュボード</a>
+                                </li>
+                                <li>
+                                    <a href="/">index</a>
+                                </li>
+                                <li>
+                                    <a href="/profile">アカウント</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--ここまでメニュー-->
+                    </div>
                     <div class="categories_group text-center">
                         <label for="category" class="font-semibold text-gray-700 mb-2">カテゴリー</label>
                         <select class="categories_control form-select block w-60 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="category_id">
@@ -40,14 +59,14 @@
                 </select>
                 <button type="submit" class="mt-4 px-6 py-3 bg-pink-500 text-black font-bold rounded-full hover:bg-pink-600 focus:outline-none focus:bg-pink-700">検索</button>
             </form>
-            @hasanyrole('admin')
+            @can('register')
                 <form action="/anime/create" method="GET">
                     <button type="submit">アニメ追加ボタン</button>
                 </form>
                 <form action="/category/create" method="GET">
                     <button type="submit">アニメカテゴリー追加ボタン</button>
                 </form>
-            @endhasanyrole
+            @endcan
             <form action="/favoriteList" method="GET">
                 <button type="submit">お気に入りリスト</button>
             </form>
@@ -61,11 +80,11 @@
                     <span class="text-sm">🌟：{{ !empty($anime->reviews_avg_star) ? floor($anime->reviews_avg_star * 10) / 10 : "評価はまだありません"}}</span></br>
                     <span class="text-sm">💖：{{ $anime->favored_by_users_count }} &emsp; </spam>
                     <span class="text-sm">💬：{{ $anime->reviews_count }} </span>
-                    @hasanyrole('admin')
+                    @can('register')
                         <form action="/edit/{{ $anime->id }}" method="GET">
                             <button type="submit">アニメ編集ボタン</button>
                         </form>
-                    @endhasanyrole
+                    @endcan
                 </div>
             @empty
                 <p class="nullAnimes" style="text-align:center; font-weight:bold; font-size:120%; text-shadow:1px 1px 1px #666; color:red; padding:4px;">該当するアニメはありません！</p>
