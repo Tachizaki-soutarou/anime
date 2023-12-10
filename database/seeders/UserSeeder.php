@@ -18,23 +18,23 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'last_name' => '立崎',
-                'first_name' => '壮太郎',
-                'nick_name' => 'S太',
-                'birth_date' => Carbon::create('2000', '11', '17'), // YYYY, MM, DD
-                'sex' => 1,
-                'email' => 'php.portfolio1117@gmail.com',
-                'password' => bcrypt('tachizaki4855')
+                'last_name' => '山田',
+                'first_name' => '龍太郎',
+                'nick_name' => 'やまたろう',
+                'birth_date' => Carbon::create('1998', '04', '19'), // YYYY, MM, DD
+                'sex' => 2,
+                'email' => 'yamada.ryutaro1111@gmail.com',
+                'password' => bcrypt('soutarou1117')
+            ],
+            [
+                'last_name' => '一ノ瀬',
+                'first_name' => '巧',
+                'nick_name' => 'たっくん',
+                'birth_date' => Carbon::create('1977', '12', '12'), // YYYY, MM, DD
+                'sex' => 2,
+                'email' => 'ichinose.takumi2222@gmail.com',
+                'password' => bcrypt('ichinosetakumi')
             ]
-            // [
-            //     'last_name' => '山田',
-            //     'first_name' => '龍太郎',
-            //     'nick_name' => 'やまたろう',
-            //     'sex' => '男性',
-            //     'age' => '25',
-            //     'email' => 'taro.yamada1111@gmail.com',
-            //     'password' => bcrypt('yamada1111')
-            // ]
         ]);
     }
 }
