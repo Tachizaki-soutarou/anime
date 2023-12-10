@@ -135,7 +135,7 @@ class AnimeController extends Controller{
     }
     
     // 管理者専用アニメ編集画面へ遷移
-    public function edit (Anime $anime,Category $category, Original $original,){
+    public function edit (Anime $anime, Category $category, Original $original){
         return view('anime.edit')->with([
             'anime' => $anime,
             // カテゴリー、原作検索のドロップダウン

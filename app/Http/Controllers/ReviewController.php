@@ -29,4 +29,13 @@ class ReviewController extends Controller{
         // 登録に成功したレビューに紐づくアニメ詳細画面に遷移
         return redirect('/animes/' . $anime->id);
     }
+    
+    // 管理者専用口コミ削除処理
+    public function commentDelete(Anime $anime, Review $review){
+        Review::where([
+          ['anime_id', '=', $anime->id],
+          ['id', '=', $review->id],
+        ])->delete();
+        return redirect('/animes/' . $anime->id);
+    }
 }
