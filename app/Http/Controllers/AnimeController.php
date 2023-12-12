@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Original;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AnimeController extends Controller{
     
@@ -77,8 +78,6 @@ class AnimeController extends Controller{
         $user = auth()->user();
         $isFavorite = $user->favoriteAnimes()->where('anime_id', $anime->id)->exists();
         
-        // $anime = $anime->load('categories');
-        
         return view('anime.show')->with([
             'anime' => $anime,
             'favoriteFlg' => $isFavorite,
@@ -113,10 +112,17 @@ class AnimeController extends Controller{
     
     // 管理者専用アニメ追加処理
     public function store (Anime $anime, Category $category, Original $original, Request $request){
+        // アニメ情報保存処理
         $anime_data = $request->input('anime', []);
         $categories = $request->input('anime_category.category_id', []);
+        
+        // 画像保存処理
+        $image = $request->file('image');
+        $path = Storage::disk('s3')->put('images', $image);
+        $anime_data['image'] = Storage::disk('s3')->url($path);
         $anime->fill($anime_data)->save();
         $anime->categories()->sync($categories);
+        
         return redirect('/');
     } 
     
@@ -146,8 +152,14 @@ class AnimeController extends Controller{
     
     // 管理者専用アニメ編集処理
     public function update (Anime $anime, Request $request){
+        // アニメ情報編集の保存処理
         $anime_data = $request->input('anime', []);
         $categories = $request->input('anime_category.category_id', []);
+        
+        // 画像保存処理
+        $image = $request->file('image');
+        $path = Storage::disk('s3')->put('images', $image);
+        $anime_data['image'] = Storage::disk('s3')->url($path);
         $anime->fill($anime_data)->save();
         $anime->categories()->sync($categories);
         return redirect('/animes/' . $anime->id);

@@ -92,7 +92,7 @@ class Anime extends Model
         $BroadStartSortDescFlg = null,
         $JapaneseOrderSortFlg = null,
         $escapeWord = null,
-        $perPage = 10
+        $perPage = 9
     ){
     $query = self::query();
     // お気に入りの合計数をカウントする

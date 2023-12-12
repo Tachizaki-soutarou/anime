@@ -4,7 +4,7 @@
         <p class="text-xs mb-6">{{ $anime->english_title }}</p>
         <div class="content mb-8">
             <div class="mb-4 text-xl">
-                <h1>総評価：{{ !empty($star_average) ? $star_average : "評価はまだありません" }}</h1>
+                <h1><i class="fas fa-star" style="color: orange;"></i>：{{ !empty($star_average) ? $star_average : "評価はまだありません" }}</h1>
             </div>
             <div class="mb-4">
                 <p class="font-semibold">カテゴリー</p>
@@ -67,10 +67,22 @@
                     <span class='text-xl font-semibold mb-2'>：{{ $review->comment_title }}</span></br>
                     <p id="animeReviewComment_{{ $review->id }}" class="text-gray-700" style="display: none;">{{ $review->comment }}</p>
                     <button onclick="clickReviewCommentBtn({{ $review->id }})">コメントを表示/非表示</button>
-                    @hasanyrole('admin')
+                    @if(Auth::id() == $review->user_id)
+                        <form action="/edit/{{ $anime->id }}/{{ $review->id }}" method="GET">
+                            @csrf
+                            <button type="submit" style="color :green;">口コミ編集</button>
+                        </form>
+                    @endif
+                    @if(Auth::id() == $review->user_id)
                         <form action="/delete/{{ $anime->id }}/{{ $review->id }}" method="POST">
                             @csrf
-                            <button type="submit" onclick="commentDeleteBtnId()">口コミ削除ボタン</button>
+                            <button type="submit" onclick="commentDeleteBtnId()" style="color :red;">口コミ削除</button>
+                        </form>
+                    @endif
+                    @hasanyrole('admin')
+                        <form action="/adminDelete/{{ $anime->id }}/{{ $review->id }}" method="POST">
+                            @csrf
+                            <button type="submit" onclick="commentDeleteBtnId()" style="color :blue;">管理者用口コミ削除</button>
                         </form>
                     @endhasanyrole
                 </div>

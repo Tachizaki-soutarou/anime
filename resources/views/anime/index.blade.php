@@ -48,25 +48,38 @@
                     </select>
                 </div>
             </form>
+            @hasanyrole('admin')
+                <form action="/anime/create" method="GET">
+                    <button type="submit">アニメ追加ボタン</button>
+                </form>
+                <form action="/category/create" method="GET">
+                    <button type="submit">アニメカテゴリー追加ボタン</button>
+                </form>
+            @endhasanyrole
         </div>
 
         <!-- アニメ一覧表示 -->
         <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
             @forelse ($animes as $anime)
                 <div class='bg-white shadow-lg rounded-lg overflow-hidden'>
-                    <h2 class='text-2xl font-semibold text-gray-700 p-4'>
+                    <p class='text-2xl font-semibold text-gray-700 p-4'>
+                        @if($anime->image != null)
+                            <img src="{{ $anime->image }}" style="width: 400px; height: 350px; object-fit: cover;">
+                        @else
+                            <img src="{{ asset('images/noimage.jpg') }}" style="width: 400px; height: 350px; object-fit: cover;">
+                        @endif
                         <a href="/animes/{{ $anime->id }}" class="hover:text-pink-600">{{ $anime->title }}</a>
-                    </h2>
+                    </p>
                     <div class="p-4">
-                        <span class="text-sm"><i class="fas fa-star" style="color: orange;"></i>：ごくもんきょう{{ $anime->reviews_avg_star ?? '評価なし' }}</span><br>
+                        <span class="text-sm"><i class="fas fa-star" style="color: orange;"></i>：{{ floor($anime->reviews_avg_star * 10) / 10 ?? '評価なし' }}</span><br>
                         <span class="text-sm"><i class="fas fa-heart" style="color: red;"></i>：{{ $anime->favored_by_users_count }}</span>
                         <span class="text-sm"><i class="fas fa-comment"></i>：{{ $anime->reviews_count }}</span>
                     </div>
-                    @can('register')
+                    @hasanyrole('admin')
                         <div class="px-4 py-2">
                             <a href="/edit/{{ $anime->id }}" class="text-indigo-600 hover:text-indigo-800">アニメ編集</a>
                         </div>
-                    @endcan
+                    @endhasanyrole
                 </div>
             @empty
                 <p class="nullAnimes w-full text-center font-bold text-lg text-red-500">該当するアニメはありません！</p>

@@ -1,7 +1,8 @@
 <x-app-layout>
     <h1>アニメ追加画面</h1>
-        <form action="/anime/store" method="POST">
+        <form action="/anime/store" method="POST" enctype="multipart/form-data">
             @csrf
+                <input type="file" name="image">
                 <div class="title">
                     <h2>アニメタイトル</h2>
                     <input type="text" size="60" name="anime[title]" placeholder="タイトル" value="{{ old('anime.title') }}"/>

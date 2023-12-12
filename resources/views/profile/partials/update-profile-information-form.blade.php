@@ -49,9 +49,9 @@
         <div class="mt-4">
             <x-input-label for="sex" :value="__('Sex')" />
             <select id="sex" name="sex" class="mt-1 block w-full" :value="old('sex', $user->sex)" required autofocus autocomplete="off">
-                <option value="2">{{ __('Other') }}</option>
-                <option value="0">{{ __('Female') }}</option>
-                <option value="1">{{ __('Male') }}</option>
+                <option value="2" {{ (old('sex', $user->sex ?? '') == 2) ? 'selected' : '' }}>{{ __('Other') }}</option>
+                <option value="0" {{ (old('sex', $user->sex ?? '') == 0) ? 'selected' : '' }}>{{ __('Female') }}</option>
+                <option value="1" {{ (old('sex', $user->sex ?? '') == 1) ? 'selected' : '' }}>{{ __('Male') }}</option>
             </select>
             <x-input-error class="mt-2" :messages="$errors->get('sex')" />
         </div>

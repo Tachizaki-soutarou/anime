@@ -31,6 +31,12 @@ Route::middleware('auth')->group(function () {
     // アニメの口コミ登録処理
     Route::post('/animes/{anime}/create_review', [ReviewController::class, 'store']);
     
+    // 口コミ編集画面へ遷移
+    Route::get('/edit/{anime}/{review}', [ReviewController::class, 'reviewEdit']);
+    
+    // 口コミ編集処理
+    Route::put('/update/{anime}/{review}', [ReviewController::class, 'reviewUpdate']);
+    
     // アニメのお気に入り登録処理
     Route::post('/animes/{anime}/favorite', [AnimeController::class, 'toggleFavorite']);
     
@@ -52,8 +58,11 @@ Route::middleware('auth')->group(function () {
     // 管理者専用アニメ編集処理
     Route::put('/update/{anime}', [AnimeController::class, 'update']);
     
+    // 一般用口コミ削除処理
+    Route::post('/delete/{anime}/{review}', [ReviewController::class, 'reviewDelete']);
+    
     // 管理者専用口コミ削除処理
-    Route::post('/delete/{anime}/{review}', [ReviewController::class, 'commentDelete']);
+    Route::post('/adminDelete/{anime}/{review}', [ReviewController::class, 'reviewDelete']);
     
     // お気に入りリスト画面へ遷移
     Route::get('/favoriteList', [AnimeController::class, 'favoriteList'])->name('favoriteList');

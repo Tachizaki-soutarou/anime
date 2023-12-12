@@ -28,7 +28,15 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div class="font-bold text-3xl"><i class="fas fa-user" style="color:red;"></i></i> ようこそ復活の {{ Auth::user()->nick_name }} さん！</div>
+                            <div class="font-bold text-xl">
+                                @if(Auth::user()->sex == 0)
+                                    <i class="fas fa-user" style="color:red;"></i> ようこそ {{ Auth::user()->nick_name }} さん！
+                                @elseif(Auth::user()->sex == 1)
+                                    <i class="fas fa-user" style="color:blue;"></i> ようこそ {{ Auth::user()->nick_name }} さん！
+                                @else
+                                    <i class="fas fa-user" style="color:gray;"></i> ようこそ {{ Auth::user()->nick_name }} さん！
+                                @endif
+                            </div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -54,9 +62,9 @@
                             </x-dropdown-link>
                         </form>
                         
-                        <!--ダッシュボード-->
+                        <!--ダッシュボード（dashboard）-->
                         <x-dropdown-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                             {{ __('Dashboard') }}
+                             {{ __('Precautions for use') }}
                         </x-dropdown-link>
                     </x-slot>
                 </x-dropdown>
