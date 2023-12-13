@@ -40,11 +40,11 @@
                 <div class="md:w-auto text-right">
                     <label for="orderByControl" class="font-semibold text-gray-700">並び替え</label>
                     <select name="orderByControl" class="form-select block w-full md:w-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onchange="this.form.submit()">
-                        <option value="">指定なし</option>
-                        <option value="1">星の数順</option>
-                        <option value="2">放送開始日古い順</option>
-                        <option value="3">放送開始日新しい順</option>
-                        <option value="4">50音順</option>
+                        <option value="0" @if(old('orderByControl') == "0") selected @endif>指定なし</option>
+                        <option value="1" @if(old('orderByControl') == "1") selected @endif>星の数順</option>
+                        <option value="2" @if(old('orderByControl') == "2") selected @endif>放送開始日古い順</option>
+                        <option value="3" @if(old('orderByControl') == "3") selected @endif>放送開始日新しい順</option>
+                        <option value="4" @if(old('orderByControl') == "4") selected @endif>50音順</option>
                     </select>
                 </div>
             </form>
@@ -71,9 +71,9 @@
                         <a href="/animes/{{ $anime->id }}" class="hover:text-pink-600">{{ $anime->title }}</a>
                     </p>
                     <div class="p-4">
-                        <span class="text-sm"><i class="fas fa-star" style="color: orange;"></i>：{{ floor($anime->reviews_avg_star * 10) / 10 ?? '評価なし' }}</span><br>
-                        <span class="text-sm"><i class="fas fa-heart" style="color: red;"></i>：{{ $anime->favored_by_users_count }}</span>
-                        <span class="text-sm"><i class="fas fa-comment"></i>：{{ $anime->reviews_count }}</span>
+                        <span class="text-sm"><i class="fas fa-star" style="color: orange;"></i>：{{!empty($anime->reviews_avg_star) ? floor($anime->reviews_avg_star * 10) / 10 : '評価なし' }}</span>&emsp;
+                        <span class="text-sm"><i class="fas fa-heart" style="color: red;"></i>：{{ $anime->favored_by_users_count }}</span>&emsp;
+                        <span class="text-sm"><i class="far fa-comment"></i>：{{ $anime->reviews_count }}</span>
                     </div>
                     @hasanyrole('admin')
                         <div class="px-4 py-2">
@@ -82,9 +82,9 @@
                     @endhasanyrole
                 </div>
             @empty
+        </div>
                 <p class="nullAnimes w-full text-center font-bold text-lg text-red-500">該当するアニメはありません！</p>
             @endforelse
-        </div>
 
         <!-- ページネーション -->
         {{$animes->appends(request()->query())->links()}}

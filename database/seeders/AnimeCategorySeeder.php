@@ -195,6 +195,24 @@ class AnimeCategorySeeder extends Seeder
                 [
                     'anime_id' => 20,
                     'category_id' => 4
+                ],
+                // 魔法少女まどか☆マギカ
+                [
+                    'anime_id' => 21,
+                    'category_id' => 1
+                ],
+                [
+                    'anime_id' => 21,
+                    'category_id' => 2
+                ],
+                // ようこそ実力至上主義の教室へ
+                [
+                    'anime_id' => 22,
+                    'category_id' => 6
+                ],
+                [
+                    'anime_id' => 22,
+                    'category_id' => 8
                 ]
          ]);
     }

@@ -1,7 +1,14 @@
 <x-app-layout>
     <div class="max-w-4xl mx-auto p-4 md:p-8">
-        <p class="text-4xl font-bold">{{ $anime->title }}</p>
-        <p class="text-xs mb-6">{{ $anime->english_title }}</p>
+        <div style="display: flex; gap:5px;">
+            @if($anime->image != null)
+                <img src="{{ $anime->image }}" style="width: 70px; height: 70px; object-fit: cover;">
+            @else
+                <img src="{{ asset('images/noimage.jpg') }}" style="width: 70px; height: 70px; object-fit: cover;">
+            @endif
+        </div>
+            <p class="text-4xl font-bold">{{ $anime->title }}</p>
+            <p class="text-xs mb-6">{{ $anime->english_title }}</p>
         <div class="content mb-8">
             <div class="mb-4 text-xl">
                 <h1><i class="fas fa-star" style="color: orange;"></i>：{{ !empty($star_average) ? $star_average : "評価はまだありません" }}</h1>
@@ -41,12 +48,14 @@
             </div>
         </div>
         <div>
-            <form action="/animes/{{ $anime->id }}/favorite" method="POST">
+            <form action="/animes/{{ $anime->id }}/favorite" name="favoriteFlgForm" method="POST">
             @csrf
                 @if($favoriteFlg)
-                    <button type="submit" name="favoriteAnimeId" value="{{ $anime->id }}" onclick="fovoriteDestroy()">お気に入り：💖</button>
+                    <type="hidden" value="{{ $anime->id }}">
+                    <a href="javascript:favoriteFlgForm.submit()">お気に入り：<i class="fas fa-heart" style="color: red;"></i></a>
                 @else
-                    <button type="submit" name="favoriteAnimeId" value="{{ $anime->id }}" onclick="fovoriteCreate()">お気に入り：💙</button>
+                    <type="hidden" value="{{ $anime->id }}">
+                    <a href="javascript:favoriteFlgForm.submit()">お気に入り：<i class="fas fa-heart" style="color: silver;"></i></a>
                 @endif
             </form>
         </div>

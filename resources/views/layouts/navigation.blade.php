@@ -91,6 +91,9 @@
             <x-responsive-nav-link :href="route('favoriteList')" :active="request()->routeIs('favoriteList')" class="text-white">
                 {{ __('Favorite') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white">
+                {{ __('Precautions for use') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
