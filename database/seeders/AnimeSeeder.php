@@ -22,7 +22,7 @@ class AnimeSeeder extends Seeder
                 'Hiragana_title' => 'じゅじゅつかいせん',
                 'Latin_alphabet_title' => 'jujutukaisen',
                 'english_title' => 'Jujutsu Kaisen',
-                'image' => 'https://animeimage.s3.ap-northeast-1.amazonaws.com/images/fpX96jUod4ei9ZlcXFDNJDBXJ7Mud2KJ1ulZ4CSq.jpg',
+                'image' => 'https://productionanimeimage.s3.amazonaws.com/images/%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6.jpg',
                 'first_broadcast_start_date' => '2020/10/03',
                 'second_broadcast_start_date' => '2023/07/03',
                 'third_broadcast_start_date' => null,
