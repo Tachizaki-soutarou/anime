@@ -63,8 +63,13 @@
             @forelse ($animes as $anime)
                 <div class='bg-white shadow-lg rounded-lg overflow-hidden'>
                     <p class='text-2xl font-semibold text-gray-700 p-4'>
-                        @if($anime->image != null)
+                        {{--@if($anime->image != null)
                             <img src="{{ $anime->image }}" style="width: 400px; height: 350px; object-fit: cover;">
+                        @else
+                            <img src="{{ asset('images/noimage.jpg') }}" style="width: 400px; height: 350px; object-fit: cover;">
+                        @endif--}}
+                        @if($anime->image != null)
+                            <img src="{{ asset('images/'.$anime->image) }}" style="width: 400px; height: 350px; object-fit: cover;">
                         @else
                             <img src="{{ asset('images/noimage.jpg') }}" style="width: 400px; height: 350px; object-fit: cover;">
                         @endif

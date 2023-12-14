@@ -158,8 +158,11 @@ class AnimeController extends Controller{
         
         // 画像保存処理
         $image = $request->file('image');
-        $path = Storage::disk('s3')->put('images', $image);
-        $anime_data['image'] = Storage::disk('s3')->url($path);
+        
+        $path = Storage::disk('public')->putFile('images', $image);
+        $anime_data['image'] = Storage::disk('public')->url($path);
+        // $path = Storage::disk('s3')->put('images', $image);
+        // $anime_data['image'] = Storage::disk('s3')->url($path);
         $anime->fill($anime_data)->save();
         $anime->categories()->sync($categories);
         return redirect('/animes/' . $anime->id);
