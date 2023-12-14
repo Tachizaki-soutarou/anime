@@ -213,7 +213,25 @@ class AnimeCategorySeeder extends Seeder
                 [
                     'anime_id' => 22,
                     'category_id' => 8
+                ],
+                // 東京喰種
+                [
+                    'anime_id' => 23,
+                    'category_id' => 2
+                ],
+                [
+                    'anime_id' => 23,
+                    'category_id' => 6
                 ]
+                // 東京喰種
+                // [
+                //     'anime_id' => ,
+                //     'category_id' => 
+                // ],
+                // [
+                //     'anime_id' => ,
+                //     'category_id' => 
+                // ]
          ]);
     }
 }

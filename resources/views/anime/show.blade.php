@@ -31,6 +31,7 @@
                 <p class="ml-4">{{ !empty($anime->second_broadcast_start_date) ? "第2期：" . $anime->second_broadcast_start_date->format('Y/m/d') : "" }}</p>
                 <p class="ml-4">{{ !empty($anime->third_broadcast_start_date) ? "第3期：" . $anime->third_broadcast_start_date->format('Y/m/d') : "" }}</p>
                 <p class="ml-4">{{ !empty($anime->fourth_broadcast_start_date) ? "第4期：" . $anime->fourth_broadcast_start_date->format('Y/m/d') : "" }}</p>
+                <p class="text-xs">※放送開始日に関しましては、地域により多少相違がございます</p>
             </div>
             <div class="anime_movie mb-4">
                 <p class="font-semibold">{{ !empty($anime->first_movie) ? "映画" : "" }}</p>
@@ -44,7 +45,9 @@
             <div class="anime_synopsis mb-4">
                 <h3 class="text-2xl font-semibold mb-2">あらすじ</h3>
                 <p id="animeSynopsis" class="text-gray-700 leading-relaxed">{!! nl2br(e($anime->synopsis)) !!}</p>
-                <button id="synopsisBtn" onclick="clickSynopsisBtn()">あらすじを表示する</button>
+                <div class="m-3">
+                    <button id="synopsisBtn" onclick="clickSynopsisBtn()" class="px-5 py-2.5 font-medium bg-blue-50 hover:bg-blue-100 hover:text-blue-600 text-blue-500 rounded-lg text-sm">あらすじを表示する</button>
+                </div>
             </div>
         </div>
         <div>
@@ -63,7 +66,7 @@
             <a href="/" class="text-indigo-600 hover:underline">戻る</a>
         </div>
         <div class="create_anime mb-6 text-center">
-            <a href='/animes/{{ $anime->id }}/create' class="bg-indigo-600 text-black px-6 py-2 rounded-lg transform transition hover:scale-105 hover:bg-indigo-700 shadow-lg">
+            <a href='/animes/{{ $anime->id }}/create' class="bg-indigo-600 text-white px-6 py-2 rounded-lg transform transition hover:scale-105 hover:bg-indigo-700 shadow-lg">
                 口コミを投稿してみませんか？
             </a>
         </div>
