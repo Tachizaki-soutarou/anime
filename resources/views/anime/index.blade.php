@@ -69,9 +69,9 @@
                             <img src="{{ asset('images/noimage.jpg') }}" style="width: 400px; height: 350px; object-fit: cover;">
                         @endif--}}
                         @if($anime->image != null)
-                            <img src="{{ asset('images/'.$anime->image) }}" style="width: 400px; height: 350px; object-fit: cover;">
+                            <img src="{{ asset('images/'.$anime->image) }}" style="width: 400px; height: 300px; object-fit: cover;">
                         @else
-                            <img src="{{ asset('images/noimage.jpg') }}" style="width: 400px; height: 350px; object-fit: cover;">
+                            <img src="{{ asset('images/noimage.jpg') }}" style="width: 400px; height: 300px; object-fit: cover;">
                         @endif
                         <a href="/animes/{{ $anime->id }}" class="hover:text-pink-600">{{ $anime->title }}</a>
                     </p>
