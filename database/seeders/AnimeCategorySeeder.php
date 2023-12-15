@@ -222,8 +222,26 @@ class AnimeCategorySeeder extends Seeder
                 [
                     'anime_id' => 23,
                     'category_id' => 6
+                ],
+                // 七つの大罪
+                [
+                    'anime_id' => 24,
+                    'category_id' => 1
+                ],
+                [
+                    'anime_id' => 24,
+                    'category_id' => 3
+                ],
+                // 進撃の巨人
+                [
+                    'anime_id' => 25,
+                    'category_id' => 2
+                ],
+                [
+                    'anime_id' => 25,
+                    'category_id' => 3
                 ]
-                // 東京喰種
+                // 
                 // [
                 //     'anime_id' => ,
                 //     'category_id' => 

@@ -29,7 +29,7 @@
                 </div>
                 <!-- タイトル -->
                 <div class="w-1/4">
-                    <label for="animesWord" class="font-semibold text-gray-700">タイトル</label>
+                    <label for="animesWord" class="font-semibold text-gray-700">タイトル（英語でも可）</label>
                     <input type="text" class="form-input block w-full rounded-md border-gray-300 shadow-sm" name="animesWord" value="{{ old('animesWord', $animesWord ?? '') }}">
                 </div>
                 <!-- 検索ボタン -->
