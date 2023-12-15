@@ -36,7 +36,7 @@
         <input type="submit" class="bg-indigo-600 text-white px-6 py-1 rounded-lg transform transition hover:scale-105 hover:bg-indigo-700 shadow-lg" value="口コミを編集する">
     </form>
         <div class="footer">
-            <a href="/animes/{{ $anime->id }}">戻る</a>
+            <a href="/animes/{{ $anime->id }}" class="text-indigo-600 hover:underline">戻る</a>
         </div>
     </div>
 </x-app-layout>
