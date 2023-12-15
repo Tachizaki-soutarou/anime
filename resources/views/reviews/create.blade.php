@@ -16,26 +16,26 @@
                     @if ($errors->any())
                     <p class="star__error" style="color:red">1～5の数字で評価をお願いいたします</p>
                     @endif
-                    <input type="number" name="review[star]" placeholder="星の数" value="{{ old('review.star') }}"/>
+                    <input type="number" name="review[star]" class="block w-full sm:w-2/3 bg-gray-200 py-2 px-3 text-gray-700 border border-gray-200 rounded focus:outline-none focus:bg-white" placeholder="星の数" value="{{ old('review.star') }}"/>
                 </div>
                 <div class="mb-4">
                     <p class="font-semibold">口コミタイトル</p>
                     @if ($errors->any())
                     <p class="comment__error" style="color:red">2文字以上、25文字以内で口コミをお願いいたします</p>
                     @endif
-                    <input type="text" size="30" name="review[comment_title]" placeholder="口コミタイトル" value="{{ old('review.comment_title') }}"/>
+                    <input type="text" size="30" name="review[comment_title]" class="block w-full sm:w-2/3 bg-gray-200 py-2 px-3 text-gray-700 border border-gray-200 rounded focus:outline-none focus:bg-white" placeholder="口コミタイトル" value="{{ old('review.comment_title') }}"/>
                 </div>
                 <div class="mb-4">
                     <p class="font-semibold">口コミ内容</p>
                     @if ($errors->any())
                     <p class="comment__error" style="color:red">2文字以上、200文字以内で口コミをお願いいたします</p>
                     @endif
-                    <textarea rows="10" cols="40" name="review[comment]" placeholder="口コミを投稿する">{{ old('review.comment') }}</textarea>
+                    <textarea rows="10" cols="40" name="review[comment]" class="block w-full sm:w-2/3 bg-gray-200 py-2 px-3 text-gray-700 border border-gray-200 rounded focus:outline-none focus:bg-white" placeholder="口コミを投稿する">{{ old('review.comment') }}</textarea>
                 </div>
-            <input type="submit" class="shadow-lg px-2 py-1  bg-blue-400 text-lg text-white font-semibold rounded  hover:bg-blue-500 hover:shadow-sm hover:translate-y-0.5 transform transition" value="口コミを投稿する">
+            <input type="submit" class="bg-indigo-600 text-white px-6 py-1 rounded-lg transform transition hover:scale-105 hover:bg-indigo-700 shadow-lg" value="口コミを投稿する">
         </form>
         <div class="footer">
-            <a href="/">戻る</a>
+            <a href="/animes/{{ $anime->id }}">戻る</a>
         </div>
     </div>
     </div>
