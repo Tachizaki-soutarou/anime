@@ -69,7 +69,8 @@
                             <img src="{{ asset('images/noimage.jpg') }}" style="width: 400px; height: 350px; object-fit: cover;">
                         @endif--}}
                         @if($anime->image != null)
-                            <img src="{{ asset('images/'.$anime->image) }}" style="width: 400px; height: 300px; object-fit: cover;">
+                            <img src="{{ asset('images/'.$anime->image) }}" style="width: 400px; height: 300px; object-fit: cover;" alt="">
+                            {{--<img src="{{ asset('storage/images/'.$anime->image) }}" style="width: 400px; height: 300px; object-fit: cover;" alt="">--}}
                         @else
                             <img src="{{ asset('images/noimage.jpg') }}" style="width: 400px; height: 300px; object-fit: cover;">
                         @endif

@@ -9,6 +9,7 @@ use App\Models\Original;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class AnimeController extends Controller{
     
@@ -117,9 +118,16 @@ class AnimeController extends Controller{
         $categories = $request->input('anime_category.category_id', []);
         
         // 画像保存処理
-        $image = $request->file('image');
-        $path = Storage::disk('s3')->put('images', $image);
-        $anime_data['image'] = Storage::disk('s3')->url($path);
+        if($request->has('image')){
+            $image = $request->file('image');
+            $imageName = time().'.'.$request->image->extension();
+            // $path = Storage::disk('public')->putFile('images', $image);
+            $request->image->move(public_path('images'), $imageName);
+            $anime_data['image'] = $imageName;
+        }
+        // lightsailの不具合により、S3への画像保存処理ができなかった。
+        // $path = Storage::disk('s3')->put('images', $image);
+        // $anime_data['image'] = Storage::disk('s3')->url($path);
         $anime->fill($anime_data)->save();
         $anime->categories()->sync($categories);
         
@@ -155,16 +163,24 @@ class AnimeController extends Controller{
         // アニメ情報編集の保存処理
         $anime_data = $request->input('anime', []);
         $categories = $request->input('anime_category.category_id', []);
-        
+        $oldImagePath = $anime->image;
         // 画像保存処理
-        $image = $request->file('image');
-        
-        $path = Storage::disk('public')->putFile('images', $image);
-        $anime_data['image'] = Storage::disk('public')->url($path);
+        if($request->has('image')){
+            $image = $request->file('image');
+            $imageName = time().'.'.$request->image->extension();
+            // $path = Storage::disk('public')->putFile('images', $image);
+            $request->image->move(public_path('images'), $imageName);
+            $anime_data['image'] = $imageName;
+        }
+        // lightsailの不具合により、S3への画像保存処理ができなかった。
         // $path = Storage::disk('s3')->put('images', $image);
         // $anime_data['image'] = Storage::disk('s3')->url($path);
         $anime->fill($anime_data)->save();
         $anime->categories()->sync($categories);
+        
+        if (File::exists(public_path('images/' . $oldImagePath))) {
+            File::delete(public_path('images/' . $oldImagePath));
+        }
         return redirect('/animes/' . $anime->id);
     }
     
