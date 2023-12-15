@@ -64,13 +64,17 @@
                 <div class='bg-white shadow-lg rounded-lg overflow-hidden'>
                     <p class='text-2xl font-semibold text-gray-700 p-4'>
                         @if($anime->image != null)
-                            <img src="{{ asset('images/'.$anime->image) }}" style="width: 400px; height: 300px; object-fit: cover;" alt="">
+                            <img src="{{ asset('images/'.$anime->image) }}" style="width: 400px; height: 300px; object-fit: cover;">
                         @else
                             <img src="{{ asset('images/noimage.jpg') }}" style="width: 400px; height: 300px; object-fit: cover;">
                         @endif
                         <a href="/animes/{{ $anime->id }}" class="hover:text-pink-600">{{ $anime->title }}</a>
                     </p>
-                    <div class="p-4">
+                    <p class="text-sm text-gray-500 px-4">カテゴリー：
+                        <span>{{ $anime->categories[0]->category_name }}、</span>
+                        <span>{{ $anime->categories[1]->category_name }}</span>
+                    </p>
+                    <div class="px-4">
                         <span class="text-sm"><i class="fas fa-star" style="color: orange;"></i>：{{!empty($anime->reviews_avg_star) ? floor($anime->reviews_avg_star * 10) / 10 : '評価なし' }}</span>&emsp;
                         <span class="text-sm"><i class="fas fa-heart" style="color: red;"></i>：{{ $anime->favored_by_users_count }}</span>&emsp;
                         <span class="text-sm"><i class="far fa-comment"></i>：{{ $anime->reviews_count }}</span>
