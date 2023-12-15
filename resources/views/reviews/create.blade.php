@@ -2,7 +2,7 @@
     <div class="max-w-4xl mx-auto p-4 md:p-8">
         <div style="display: flex; gap:5px;">
             @if($anime->image != null)
-                <img src="{{ $anime->image }}" style="width: 70px; height: 70px; object-fit: cover;">
+                <img src="{{ asset('images/'.$anime->image) }}" style="width: 70px; height: 70px; object-fit: cover;">
             @else
                 <img src="{{ asset('images/noimage.jpg') }}" style="width: 70px; height: 70px; object-fit: cover;">
             @endif
@@ -32,11 +32,11 @@
                     @endif
                     <textarea rows="10" cols="40" name="review[comment]" placeholder="口コミを投稿する">{{ old('review.comment') }}</textarea>
                 </div>
-                </div>
             <input type="submit" value="口コミを投稿する">
         </form>
         <div class="footer">
             <a href="/">戻る</a>
         </div>
+    </div>
     </div>
 </x-app-layout>
