@@ -43,7 +43,7 @@
                 <p class="text-xs">{{ !empty($anime->first_movie) ? "※実写版、総集編は対象ではありません" : "" }}</p>
             </div>
             <div class="anime_synopsis mb-4">
-                <h3 class="text-2xl font-semibold mb-2">あらすじ</h3>
+                <h3 class="font-semibold">あらすじ</h3>
                 <p id="animeSynopsis" class="text-gray-700 leading-relaxed">{!! nl2br(e($anime->synopsis)) !!}</p>
                 <div class="m-3">
                     <button id="synopsisBtn" onclick="clickSynopsisBtn()" class="px-5 py-2.5 font-medium bg-blue-50 hover:bg-blue-100 hover:text-blue-600 text-blue-500 rounded-lg text-sm">あらすじを表示する</button>
