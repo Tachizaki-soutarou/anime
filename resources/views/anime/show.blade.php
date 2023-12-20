@@ -86,17 +86,18 @@
                         </form>
                     @endif
                     @if(Auth::id() == $review->user_id)
-                        <form action="/delete/{{ $anime->id }}/{{ $review->id }}" method="POST">
+                        <form action="/delete/{{ $anime->id }}/{{ $review->id }}" id="anime_comment_form_{{ $anime->id }}_{{ $review->id }}" method="POST">
                             @csrf
-                            <button type="submit" onclick="commentDeleteBtnId()" style="color :red;">口コミ削除</button>
+                            <button type="button" onclick="commentDeleteBtnId({{ $anime->id }},{{ $review->id }})" style="color :red;">口コミ削除</button>
                         </form>
+                    @else
+                        @hasanyrole('admin')
+                            <form action="/adminDelete/{{ $anime->id }}/{{ $review->id }}" id="anime_comment_form_{{ $anime->id }}_{{ $review->id }}" method="POST">
+                                @csrf
+                                <button type="button" onclick="commentDeleteBtnId({{ $anime->id }},{{ $review->id }})" style="color :blue;">管理者用口コミ削除
+                            </form>
+                        @endhasanyrole
                     @endif
-                    @hasanyrole('admin')
-                        <form action="/adminDelete/{{ $anime->id }}/{{ $review->id }}" method="POST">
-                            @csrf
-                            <button type="submit" onclick="commentDeleteBtnId()" style="color :blue;">管理者用口コミ削除</button>
-                        </form>
-                    @endhasanyrole
                 </div>
             @endforeach
         </div>
@@ -120,13 +121,10 @@
         	}
         }
         
-        function commentDeleteBtnId(){
-            if(window.confirm("本当に削除しますか？")){
-                
-            	}
-            	else{
-            		window.alert('キャンセルされました');
-            	}
+        function commentDeleteBtnId(anime_id, review_id){
+            if (confirm('本当に削除しますか？')) {
+            document.getElementById(`anime_comment_form_{{ $anime->id }}_{{ $review->id }}`).submit();
+            }
         }
         
         
