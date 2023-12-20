@@ -71,11 +71,9 @@
                         <a href="/animes/{{ $anime->id }}" class="hover:text-pink-600">{{ $anime->title }}</a>
                     </p>
                     <p class="text-xs text-gray-500 px-4">カテゴリー：
-                        <span>{{ $anime->categories[0]->category_name }}、</span>
-                        <span>{{ $anime->categories[1]->category_name }}</span>
-                        {{--@if($anime->categories[2]->category_name != null)
-                            <span>、{{ $anime->categories[2]->category_name }}</span>
-                        @endif--}}
+                        @foreach ($anime->categories as $category)
+                            <span class="px-1">{{ $category->category_name }}<span>
+                        @endforeach
                     </p>
                     <div class="px-4">
                         <span class="text-sm"><i class="fas fa-star" style="color: orange;"></i>：{{!empty($anime->reviews_avg_star) ? floor($anime->reviews_avg_star * 10) / 10 : '評価なし' }}</span>&emsp;
