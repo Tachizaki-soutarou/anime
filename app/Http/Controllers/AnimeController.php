@@ -163,9 +163,10 @@ class AnimeController extends Controller{
         // アニメ情報編集の保存処理
         $anime_data = $request->input('anime', []);
         $categories = $request->input('anime_category.category_id', []);
-        $oldImagePath = $anime->image;
         // 画像保存処理
-        if($request->has('image')){
+        $oldImagePath = $anime->image;
+        $requestImage = $request->has('image');
+        if($requestImage){
             $image = $request->file('image');
             $imageName = time().'.'.$request->image->extension();
             // $path = Storage::disk('public')->putFile('images', $image);
@@ -178,15 +179,17 @@ class AnimeController extends Controller{
         $anime->fill($anime_data)->save();
         $anime->categories()->sync($categories);
         
-        if (File::exists(public_path('images/' . $oldImagePath))) {
-            File::delete(public_path('images/' . $oldImagePath));
+        if($requestImage){
+            if (File::exists(public_path('images/' . $oldImagePath))) {
+                File::delete(public_path('images/' . $oldImagePath));
+            }
         }
         return redirect('/animes/' . $anime->id);
     }
     
     // お気に入りリスト画面へ遷移
     public function favoriteList (Anime $anime, Request $request){
-        $perPage = 20;
+        $perPage = 15;
         $user = auth()->user();
         $favorites = $user->favoriteAnimes()->with('reviews')->paginate($perPage);
         return view('anime.favoriteList')->with([

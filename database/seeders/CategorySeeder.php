@@ -18,46 +18,54 @@ class CategorySeeder extends Seeder
         DB::table('categories')->insert([
                 [
                     // 1
-                    'category_name' => 'SF/ファンタジー'
+                    'category_name' => 'SF'
                 ],
                 [
                     // 2
-                    'category_name' => 'ダークファンタジー'
+                    'category_name' => 'ファンタジー'
                 ],
                 [
                     // 3
-                    'category_name' => 'アクション/バトル'
+                    'category_name' => 'ダークファンタジー'
                 ],
                 [
                     // 4
-                    'category_name' => 'コメディ'
+                    'category_name' => 'アクション/バトル'
                 ],
                 [
                     // 5
-                    'category_name' => 'ドラマ'
+                    'category_name' => 'コメディ'
                 ],
                 [
                     // 6
-                    'category_name' => 'サスペンス'
+                    'category_name' => 'ドラマ'
                 ],
                 [
                     // 7
-                    'category_name' => 'アドベンチャー'
+                    'category_name' => 'サスペンス'
                 ],
                 [
                     // 8
-                    'category_name' => '学園/青春'
+                    'category_name' => 'ホラー'
                 ],
                 [
                     // 9
-                    'category_name' => 'サバイバル'
+                    'category_name' => 'アドベンチャー'
                 ],
                 [
                     // 10
-                    'category_name' => 'ラブコメディ'
+                    'category_name' => '学園/青春'
                 ],
                 [
                     // 11
+                    'category_name' => 'サバイバル'
+                ],
+                [
+                    // 12
+                    'category_name' => 'ラブコメディ'
+                ],
+                [
+                    // 13
                     'category_name' => 'ロボット/メカ'
                 ]
          ]);

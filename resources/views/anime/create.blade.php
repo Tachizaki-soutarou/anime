@@ -72,6 +72,13 @@
                             </option>
                         @endforeach
                     </select>
+                    <select style="width: 250px" name="anime_category[category_id][]">
+                        @foreach ($dropDownCategories as $categories)
+                            <option value="{{ $categories->id }}">
+                                {{ $categories->category_name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="originals">
                     <h2>原作</h2>

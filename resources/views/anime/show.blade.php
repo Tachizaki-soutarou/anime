@@ -121,8 +121,15 @@
         }
         
         function commentDeleteBtnId(){
-            window.confirm("本当に削除しますか？");
+            if(window.confirm("本当に削除しますか？")){
+                
+            	}
+            	else{
+            		window.alert('キャンセルされました');
+            	}
         }
+        
+        
     
         function clickReviewCommentBtn($review_id){
         	const ReviewCommentId = document.getElementById("animeReviewComment_" + $review_id);
