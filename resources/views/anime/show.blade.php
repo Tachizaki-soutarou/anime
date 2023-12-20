@@ -123,7 +123,7 @@
         
         function commentDeleteBtnId(anime_id, review_id){
             if (confirm('本当に削除しますか？')) {
-            document.getElementById(`anime_comment_form_{{ anime_id }}_{{ review_id }}`).submit();
+            document.getElementById(`anime_comment_form_${ anime_id }_${ review_id }`).submit();
             }
         }
         
