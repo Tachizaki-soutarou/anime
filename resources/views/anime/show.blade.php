@@ -77,7 +77,7 @@
                     <p>{{ $review->user->nick_name }} さんの口コミ</p>
                     <span class='text-xl font-semibold mb-2'>星 {{$review->star}}</span>
                     <span class='text-xl font-semibold mb-2'>：{{ $review->comment_title }}</span></br>
-                    <p id="animeReviewComment_{{ $review->id }}" class="text-gray-700" style="display: none;">{{ $review->comment }}</p>
+                    <p id="animeReviewComment_{{ $review->id }}" class="text-gray-700" style="display: none;">{!! nl2br(e($review->comment)) !!}</p>
                     <button onclick="clickReviewCommentBtn({{ $review->id }})">コメントを表示/非表示</button>
                     @if(Auth::id() == $review->user_id)
                         <form action="/edit/{{ $anime->id }}/{{ $review->id }}" method="GET">
