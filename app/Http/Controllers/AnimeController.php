@@ -30,6 +30,8 @@ class AnimeController extends Controller{
         $BroadStartSortAscFlg = null;   // 放送開始日古い順
         $BroadStartSortDescFlg = null;  // 放送開始日新しい順
         $JapaneseOrderSortFlg = null;   // 50音順
+        $favoriteOrderSortFlg = null;   // お気に入り数順
+        $commentOrderSortFlg = null;    // コメント数順
         // $orderByFlgの値によって、並び替えの条件分岐
         switch($orderByFlg){
             case 1 :
@@ -48,6 +50,14 @@ class AnimeController extends Controller{
             // 50音順からパラメーターを取得し、nullでなければその値を使用します
                 $JapaneseOrderSortFlg = $request->orderByControl;
             break;
+            case 5 :
+            // お気に入り数順からパラメーターを取得し、nullでなければその値を使用します
+                $favoriteOrderSortFlg = $request->orderByControl;
+            break;
+            case 6 :
+            // コメント数順からパラメーターを取得し、nullでなければその値を使用します
+                $commentOrderSortFlg = $request->orderByControl;
+            break;
         }
         // 曖昧検索からパラメーターを取得し、nullでなければその値を使用します
         $escapeWord = $request->filled('animesWord') ? $request->animesWord : null;
@@ -59,6 +69,8 @@ class AnimeController extends Controller{
             $BroadStartSortAscFlg,
             $BroadStartSortDescFlg,
             $JapaneseOrderSortFlg,
+            $favoriteOrderSortFlg,
+            $commentOrderSortFlg,
             $escapeWord
         );
         

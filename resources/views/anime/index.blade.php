@@ -45,6 +45,8 @@
                         <option value="2" @if(old('orderByControl') == "2") selected @endif>放送開始日古い順</option>
                         <option value="3" @if(old('orderByControl') == "3") selected @endif>放送開始日新しい順</option>
                         <option value="4" @if(old('orderByControl') == "4") selected @endif>50音順</option>
+                        <option value="5" @if(old('orderByControl') == "5") selected @endif>お気に入り数順</option>
+                        <option value="6" @if(old('orderByControl') == "6") selected @endif>コメント数順</option>
                     </select>
                 </div>
             </form>

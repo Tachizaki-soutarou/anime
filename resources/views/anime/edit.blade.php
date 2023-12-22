@@ -94,7 +94,7 @@
                     @endforeach
                 </select>
             </div>
-        <input type="submit" value="アニメを編集する">
+        <input type="submit" class="bg-indigo-600 text-white px-6 py-1 rounded-lg transform transition hover:scale-105 hover:bg-indigo-700 shadow-lg" value="アニメを編集する">
     </form>
     <div class="footer">
         <a href="/">戻る</a>

@@ -91,6 +91,8 @@ class Anime extends Model
         $BroadStartSortAscFlg = null,
         $BroadStartSortDescFlg = null,
         $JapaneseOrderSortFlg = null,
+        $favoriteOrderSortFlg = null,
+        $commentOrderSortFlg = null,
         $escapeWord = null,
         $perPage = 9
     ){
@@ -103,13 +105,23 @@ class Anime extends Model
     $query->withAvg('reviews', 'star');
     // 並び順の処理
     if ($BroadStartSortAscFlg !== null) {
+        // 放送開始日古い順
         $query->orderBy('first_broadcast_start_date');
     } else if ($BroadStartSortDescFlg !== null){
+        // 放送開始日新しい順
         $query->orderBy('first_broadcast_start_date','DESC');
     } else if ($JapaneseOrderSortFlg !== null){
+        // 50音順
         $query->orderBy('Hiragana_title');
     } else if ($animeReviewStarsFlag  !== null){
+        // 星の数順
         $query->orderByDesc('reviews_avg_star');
+    } else if ($favoriteOrderSortFlg  !== null){
+        // お気に入り数順
+        $query->orderByDesc('favored_by_users_count');
+    } else if ($commentOrderSortFlg  !== null){
+        // コメント数順
+        $query->orderByDesc('reviews_count');
     }
     // カテゴリーでの絞り込み
     if ($categoryId !== null) {
