@@ -63,7 +63,7 @@
             </form>
         </div>
         <div class="footer mb-8 mt-4">
-            <a href="/" class="text-indigo-600 hover:underline">戻る</a>
+            <a href="{{ route('backToIndex') }}" class="text-indigo-600 hover:underline">戻る</a>
         </div>
         <div class="create_anime mb-6 text-center">
             <a href='/animes/{{ $anime->id }}/create' class="bg-indigo-600 text-white px-6 py-2 rounded-lg transform transition hover:scale-105 hover:bg-indigo-700 shadow-lg">

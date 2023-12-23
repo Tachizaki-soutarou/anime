@@ -74,9 +74,13 @@ class AnimeController extends Controller{
             $escapeWord
         );
         
+        // ページネーションの値をセッションに保持
+        session(['last_page_type' => 'index', 'last_page_number' => $request->page]);
+        
         return view('anime.index')->with([
             'category_id' => $categoryId,
             'original_id' => $originalId,
+            'orderByControl' => $orderByFlg,
             'animesWord' => $escapeWord,
             'animes' => $animes,
             // カテゴリー、原作検索のドロップダウン
@@ -201,11 +205,27 @@ class AnimeController extends Controller{
     
     // お気に入りリスト画面へ遷移
     public function favoriteList (Anime $anime, Request $request){
-        $perPage = 15;
+        $perPage = 6;
         $user = auth()->user();
         $favorites = $user->favoriteAnimes()->with('reviews')->paginate($perPage);
+        // お気に入りリストのページネーションの値をセッションに保存
+        session(['last_page_type' => 'favoriteList', 'last_page_number' => $request->page]);
+        
         return view('anime.favoriteList')->with([
             'animes' => $favorites
         ]);
+    }
+    
+    // セッションに保存されているページの値を付与
+    public function backToIndex(){
+        $lastPageType = session('last_page_type');
+        $lastPageNumber = session('last_page_number', 1); // デフォルトは1ページ目
+        if ($lastPageType === 'favoriteList') {
+            // お気に入り一覧画面に戻る
+            return redirect()->route('favoriteList', ['page' => $lastPageNumber]);
+        } else {
+            // 一般の一覧画面に戻る
+            return redirect()->route('index', ['page' => $lastPageNumber]);
+        }
     }
 }

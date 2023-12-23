@@ -40,13 +40,13 @@
                 <div class="md:w-auto text-right">
                     <label for="orderByControl" class="font-semibold text-gray-700">並び替え</label>
                     <select name="orderByControl" class="form-select block w-full md:w-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onchange="this.form.submit()">
-                        <option value="0" @if(old('orderByControl') == "0") selected @endif>指定なし</option>
-                        <option value="1" @if(old('orderByControl') == "1") selected @endif>星の数順</option>
-                        <option value="2" @if(old('orderByControl') == "2") selected @endif>放送開始日古い順</option>
-                        <option value="3" @if(old('orderByControl') == "3") selected @endif>放送開始日新しい順</option>
-                        <option value="4" @if(old('orderByControl') == "4") selected @endif>50音順</option>
-                        <option value="5" @if(old('orderByControl') == "5") selected @endif>お気に入り数順</option>
-                        <option value="6" @if(old('orderByControl') == "6") selected @endif>コメント数順</option>
+                        <option value="0" {{ (old('orderByControl', $orderByControl ?? '') == 0) ? 'selected' : '' }}>指定なし</option>
+                        <option value="1" {{ (old('orderByControl', $orderByControl ?? '') == 1) ? 'selected' : '' }}>星の数順</option>
+                        <option value="2" {{ (old('orderByControl', $orderByControl ?? '') == 2) ? 'selected' : '' }}>放送開始日古い順</option>
+                        <option value="3" {{ (old('orderByControl', $orderByControl ?? '') == 3) ? 'selected' : '' }}>放送開始日新しい順</option>
+                        <option value="4" {{ (old('orderByControl', $orderByControl ?? '') == 4) ? 'selected' : '' }}>50音順</option>
+                        <option value="5" {{ (old('orderByControl', $orderByControl ?? '') == 5) ? 'selected' : '' }}>お気に入り数順</option>
+                        <option value="6" {{ (old('orderByControl', $orderByControl ?? '') == 6) ? 'selected' : '' }}>コメント数順</option>
                     </select>
                 </div>
             </form>

@@ -22,6 +22,9 @@ Route::middleware('auth')->group(function () {
     // TOP画面、検索後の画面遷移
     Route::get('/', [AnimeController::class, 'index'])->name('index');
     
+    // ページネーション保持遷移
+    Route::get('/back', [AnimeController::class, 'backToIndex'])->name('backToIndex');
+    
     // アニメの詳細情報へ遷移
     Route::get('/animes/{anime}', [AnimeController::class, 'show']);
     
